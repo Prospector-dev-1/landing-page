@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
-import { Lightbulb, Rocket, Users, Shield, Sparkles, CheckCircle, FileText, Video } from "lucide-react";
+import { Lightbulb, Rocket, Users, Shield, Hammer, CheckCircle, Wrench, WrenchIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { React } from "react";
 
 export default function ForInnovatorsPage() {
   return (
@@ -21,7 +22,7 @@ export default function ForInnovatorsPage() {
             }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
           />
-            </div>
+          </div>
 
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -53,14 +54,14 @@ export default function ForInnovatorsPage() {
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
-                <Link to="/apply">
+              <Link to="/apply">
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-8"
                   >
                     Join Waitlist
-                  </Button>
-                </Link>
+                </Button>
+              </Link>
               </div>
             </motion.div>
           </div>
@@ -173,27 +174,28 @@ export default function ForInnovatorsPage() {
               {
                 icon: Rocket,
                 title: "Investor Connections",
-                description: "Curated intros to angels/micro‑funds relevant to your space.",
+                description: "Investors will see your pitch in their feed, once interested, they can easily view your full innovation's profile (pitchdeck), and send you a message directly.",
                 color: "#4FC3F7",
+              },
+              {
+                icon: Hammer,
+                title: "Creators",
+                description: "Onboard Freelancers, Interns, and other talent to help you build or scale your innovation for either a fixed pay, Equity, or even Commission.",
+                color: "#7C4DFF",
               },
               {
                 icon: Users,
-                title: "Creator Teams",
-                description: "Bench of creators (engineering, design, growth) ready to ship.",
+                title: "Teams",
+                description: "Connect with and create your team of other innovators, investors, and creators all in one place.",
                 color: "#7C4DFF",
-              },
-              {
-                icon: FileText,
-                title: "Milestone Templates",
-                description: "Templates for MVP, pilots, and GTM sprints built-in.",
-                color: "#4FC3F7",
               },
               {
                 icon: Shield,
-                title: "IP Protection",
-                description: "IP protection and private repos; contributor agreements baked in.",
-                color: "#7C4DFF",
-              },
+                title: "Optional NDA Protection",
+                description: "Investors will have to agree to a NDA before viewing your full innovation (your pitch will be publicly available).",
+                color: "#4FC3F7",
+              }
+              
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -239,9 +241,9 @@ export default function ForInnovatorsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-              <h2 className="text-4xl md:text-5xl mb-4">Your startup submission</h2>
+              <h2 className="text-4xl md:text-5xl mb-4">Beta Application Requirements</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              What we need to evaluate your startup
+              What we need to evaluate your application
             </p>
           </motion.div>
 
@@ -250,28 +252,23 @@ export default function ForInnovatorsPage() {
               {[
                 {
                   icon: CheckCircle,
-                  title: "Working product",
-                  description: "A functioning product or MVP with real users or early traction.",
+                  title: "Overview",
+                  description: "A brief overview of your innovation, what it does, and who it's for.",
                   color: "#4FC3F7",
                 },
                 {
-                  icon: Video,
-                  title: "Product demo",
-                  description: "60–120s walkthrough showing your product in action (not a prototype).",
+                  icon: Wrench,
+                  title: "Aditional information (optional)",
+                  description: "Either your Pitchdeck, or a 60–120s walkthrough showing your product in action (can be a prototype).",
                   color: "#7C4DFF",
                 },
                 {
-                  icon: FileText,
-                  title: "Traction data",
-                  description: "User metrics, revenue, or other proof of product-market fit.",
+                  icon: WrenchIcon,
+                  title: "Why?",
+                  description: "To ensure quality, we must prevent phony Innovations from reaching FishTank.",
                   color: "#4FC3F7",
                 },
-                {
-                  icon: Rocket,
-                  title: "Growth plan",
-                  description: "Clear milestones for scaling with identified resource needs.",
-                  color: "#7C4DFF",
-                },
+                
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
@@ -301,11 +298,9 @@ export default function ForInnovatorsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="mt-12 text-center"
-            >
-              <p className="text-white/60 max-w-2xl mx-auto">
-                We're looking for startups that have <em className="text-[#4FC3F7]">validated product-market fit</em>, <em className="text-[#7C4DFF]">real traction or users</em>, and <em className="text-[#4FC3F7]">clear scaling potential</em>.
-              </p>
-            </motion.div>
+            ></motion.div>
+              
+            
           </div>
         </div>
       </section>
@@ -372,13 +367,13 @@ export default function ForInnovatorsPage() {
                 </div>
 
                 <p className="mt-8 text-sm text-white/40">
-                  Working product required • Free to join • Verification in 48 hours
+                  18 + or legal guardians approval required • Free to join • Verification in less than 48 hours
                 </p>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
-      </div>
+     </div>
   );
 }

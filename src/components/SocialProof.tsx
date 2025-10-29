@@ -1,41 +1,4 @@
 import { motion } from "motion/react";
-import { TrendingUp, Users, Zap, DollarSign } from "lucide-react";
-
-const metrics = [
-  {
-    icon: Users,
-    value: "2,500+",
-    label: "Active Members",
-    color: "#4FC3F7",
-  },
-  {
-    icon: Zap,
-    value: "340+",
-    label: "Projects Funded",
-    color: "#7C4DFF",
-  },
-  {
-    icon: DollarSign,
-    value: "$45M",
-    label: "Total Invested",
-    color: "#4FC3F7",
-  },
-  {
-    icon: TrendingUp,
-    value: "89%",
-    label: "Success Rate",
-    color: "#7C4DFF",
-  },
-];
-
-const logos = [
-  "TechCrunch",
-  "Forbes",
-  "Wired",
-  "Fast Company",
-  "The Verge",
-  "Bloomberg",
-];
 
 export function SocialProof() {
   return (
@@ -43,76 +6,6 @@ export function SocialProof() {
       <div className="absolute inset-0 bg-[#0a0a1a]" />
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Metrics */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-6xl mx-auto mb-20"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="flex justify-center mb-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, ${metric.color}30, ${metric.color}10)`,
-                      border: `1px solid ${metric.color}40`,
-                    }}
-                  >
-                    <metric.icon className="w-6 h-6" style={{ color: metric.color }} />
-                  </div>
-                </div>
-                <div
-                  className="text-4xl mb-2"
-                  style={{
-                    background: `linear-gradient(135deg, ${metric.color}, ${metric.color}CC)`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  {metric.value}
-                </div>
-                <p className="text-white/60 text-sm">{metric.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Featured in logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <p className="text-white/40 text-sm mb-8">Featured in</p>
-          
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {logos.map((logo, index) => (
-              <motion.div
-                key={logo}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                className="text-white/30 hover:text-white/60 transition-colors cursor-pointer text-xl"
-              >
-                {logo}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Trust badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

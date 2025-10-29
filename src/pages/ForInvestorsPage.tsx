@@ -58,16 +58,7 @@ export default function ForInvestorsPage() {
                 >
                   Request Verification
                 </Button>
-                <Link to="/">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/20 hover:bg-white/10 rounded-2xl px-8"
-                  >
-                    Learn More
-                </Button>
-              </Link>
-            </div>
+              </div>
             </motion.div>
           </div>
         </div>

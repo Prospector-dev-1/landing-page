@@ -165,22 +165,6 @@ export function SubmitInnovation() {
                 ))}
               </div>
             </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <div className="text-3xl bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent mb-1">
-                  87%
-                </div>
-                <p className="text-sm text-white/60">Success Rate</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <div className="text-3xl bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent mb-1">
-                  2.4M
-                </div>
-                <p className="text-sm text-white/60">Avg. Funding</p>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
