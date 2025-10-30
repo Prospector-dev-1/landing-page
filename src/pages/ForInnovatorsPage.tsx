@@ -1,8 +1,9 @@
+import {React} from "react";
 import { motion } from "motion/react";
 import { Lightbulb, Rocket, Users, Shield, Hammer, CheckCircle, Wrench, WrenchIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
-import { React } from "react";
+
 
 export default function ForInnovatorsPage() {
   return (
@@ -43,14 +44,14 @@ export default function ForInnovatorsPage() {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl mb-6 bg-gradient-to-r from-white via-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
-                Scale your startup with
+                Build and Scale your startup
                 <br />
-                capital and talent
+                with capital and talent
               </h1>
 
               <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
-                If you have a working product and need funding or a team to scale, join our waitlist. 
-                We verify your startup is legitimate, then connect you with investors and top creators.
+                If you have been working on a product and need funding or a team to scale, join our waitlist. 
+                We verify your startup is legitimate to ensure quality, then connect you with investors and top creators.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
@@ -92,28 +93,24 @@ export default function ForInnovatorsPage() {
             {[
               {
                 step: "1",
-                title: "Submit your startup",
-                description: "Show us your product, traction data, and funding goals.",
+                title: "Apply for beta",
+                description: "Fill out the application form with your Name, Email, \nInnovation's overview, and a link to your Pitchdeck (optional).",
+               
                 color: "#4FC3F7",
               },
               {
                 step: "2",
                 title: "Verification review",
-                description: "We verify your startup is legitimate (not a phony submission).",
+                description: "We verify your startup is legitimate (not a phony submission).\nThis ensures quality and prevents spam.",
                 color: "#7C4DFF",
               },
               {
                 step: "3",
                 title: "Join the waitlist",
-                description: "Once verified, you join our waitlist to access the platform.",
+                description: "Once verified, you will recieve an email with confirmation and a link to the platform.",
                 color: "#4FC3F7",
               },
-              {
-                step: "4",
-                title: "Get matched",
-                description: "We introduce investors & creators when spots open up.",
-                color: "#7C4DFF",
-              },
+              
             ].map((item, index) => (
               <motion.div
                 key={item.step}
@@ -138,7 +135,14 @@ export default function ForInnovatorsPage() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl mb-2">{item.title}</h3>
-                  <p className="text-white/60">{item.description}</p>
+                  <p className="text-white/60">
+                    {item.description.split('\n').map((line, i, arr) => (
+                      <span key={i}>
+                        {line}
+                        {i < arr.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -192,7 +196,7 @@ export default function ForInnovatorsPage() {
               {
                 icon: Shield,
                 title: "Optional NDA Protection",
-                description: "Investors will have to agree to a NDA before viewing your full innovation (your pitch will be publicly available).",
+                description: "If turned on, Investors will have to agree to a NDA before viewing your full innovation (Your pitch will be publicly available).",
                 color: "#4FC3F7",
               }
               
@@ -222,7 +226,14 @@ export default function ForInnovatorsPage() {
                     <item.icon className="w-8 h-8" style={{ color: item.color }} />
                   </div>
                   <h3 className="text-2xl mb-4">{item.title}</h3>
-                  <p className="text-white/60">{item.description}</p>
+                  <p className="text-white/60">
+                    {item.description.split('\n').map((line, i, arr) => (
+                      <span key={i}>
+                        {line}
+                        {i < arr.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -288,7 +299,14 @@ export default function ForInnovatorsPage() {
                     <item.icon className="w-6 h-6" style={{ color: item.color }} />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-white/60 text-sm">{item.description}</p>
+                  <p className="text-white/60 text-sm">
+                    {item.description.split('\n').map((line, i, arr) => (
+                      <span key={i}>
+                        {line}
+                        {i < arr.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -344,15 +362,15 @@ export default function ForInnovatorsPage() {
                 </motion.div>
 
                 <h2 className="text-4xl md:text-6xl mb-6">
-                  Ready to scale your
-                  <br />
-                  <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
-                    startup?
+                  Ready to <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
+                    Start-up?
                   </span>
-                </h2>
+                </h2>  
+                  
+                
 
                 <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">
-                  Join a select group of startups with validated products ready to scale.
+                  Join the waitlist to get access to Beta platform, and first dibs on both Investors and Creators.
                 </p>
 
                 <div className="flex flex-wrap gap-4 justify-center">

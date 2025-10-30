@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, React } from "react";
 
 interface PageShellProps {
   children: ReactNode;

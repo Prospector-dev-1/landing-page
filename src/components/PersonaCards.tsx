@@ -1,3 +1,4 @@
+import {React} from "react";
 import { motion } from "motion/react";
 import { Lightbulb, Palette, TrendingUp, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
@@ -10,10 +11,10 @@ const personas = [
     link: "/innovators",
     description: "Have a game-changing startup but need resources to scale?",
     features: [
-      "Submit your innovation pitch",
-      "Get matched with investors & creators",
-      "Retain creative control",
-      "Access mentorship & guidance",
+      "Create your innovation's profile",
+      "Upload Pitches to your innovation's profile.",
+      "Investors see you're pitch, they like it? -> click to see full Innovation -> message innovator.",
+      "Need help building, marketing, or scaling? \n Post listings to hire skilled Freelancers, Interns, or fellow Innovators  \n — for fixed pay, equity, or commission.",
     ],
     gradient: "from-[#4FC3F7] to-[#2196F3]",
     accentColor: "#4FC3F7",
@@ -22,12 +23,12 @@ const personas = [
     icon: Palette,
     title: "Creators",
     link: "/creators",
-    description: "Build meaningful projects with talented teams and solid funding.",
+    description: "Freelancers, Interns, or anyone with a skill, brings there talent to the heart of innovation.",
     features: [
-      "Browse vetted opportunities",
-      "Work on cutting-edge startups",
-      "Collaborate with top talent",
-      "Get paid for your craft",
+      "Sign up, Upload your skill, resume, and even Past Projects (optional).",
+      "Select your perfered payment methode; Fixed pay, Equity, Commission, Custom.",
+      "Open the discover page to start browsing job listings, Swipe Left to pass or Swipe right to apply",
+      "Browse other creators, create a Team, and start working on projects together.",
     ],
     gradient: "from-[#7C4DFF] to-[#651FFF]",
     accentColor: "#7C4DFF",
@@ -38,10 +39,10 @@ const personas = [
     link: "/investors",
     description: "Back high-potential startups before they hit the mainstream.",
     features: [
-      "Curated deal flow",
-      "Early-stage opportunities",
-      "Direct access to innovators",
-      "Portfolio support",
+      "Access a curated stream of high-potential startups and founders.",
+      "Experience transparency — every innovation, every team, every metric in one place.",
+      "Engage directly with innovators shaping tomorrow's industries.",
+      "Invest with insight. Empower the builders of the future.",
     ],
     gradient: "from-[#4FC3F7] to-[#7C4DFF]",
     accentColor: "#4FC3F7",

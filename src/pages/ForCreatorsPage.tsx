@@ -1,3 +1,4 @@
+import {React} from "react";
 import { motion } from "motion/react";
 import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle } from "lucide-react";
 import { Button } from "../components/ui/button";

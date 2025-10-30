@@ -1,5 +1,6 @@
+import {React} from "react";
 import { motion } from "motion/react";
-import { TrendingUp, BarChart, Shield, Clock, Search, MessageSquare, DollarSign, CheckCircle } from "lucide-react";
+import { TrendingUp, File, Shield, AtomIcon, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -29,14 +30,14 @@ export default function ForInvestorsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center"
-            >
+              className="text-center">
+            
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
-              >
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8">
+              
                 <TrendingUp className="w-4 h-4 text-[#4FC3F7]" />
                 <span className="text-sm text-white/70">For Investors</span>
               </motion.div>
@@ -44,7 +45,7 @@ export default function ForInvestorsPage() {
               <h1 className="text-5xl md:text-7xl mb-6 bg-gradient-to-r from-white via-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
                 Access reviewed
                 <br />
-                early‑stage projects
+                Early-stage Innovations
               </h1>
 
               <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
@@ -54,15 +55,22 @@ export default function ForInvestorsPage() {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-8"
-                >
-                  Request Verification
+                  className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-8">
+                    <Link to="/apply">Join Waitlist</Link>
+                </Button>
+  
+                <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/20 hover:bg-white/10 rounded-2xl px-8"
+                  >
+                 <Link to="/learn-more?tab=investors">Learn More</Link>
                 </Button>
               </div>
             </motion.div>
           </div>
         </div>
-      </section>
+      </section>   
 
       {/* What You'll See Section */}
       <section className="py-24 relative overflow-hidden">
@@ -87,29 +95,32 @@ export default function ForInvestorsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                icon: BarChart,
-                title: "Standardized pitch",
-                description: "Overview and problem/solution snapshot.",
-                color: "#4FC3F7",
-              },
-              {
                 icon: Clock,
-                title: "Execution plan",
-                description: "Milestones with clear acceptance criteria.",
-                color: "#7C4DFF",
-              },
-              {
-                icon: CheckCircle,
-                title: "Artifacts and evidence",
-                description: "Designs, repos, demos, analytics at each step.",
+                title: "Quick Pitches",
+                description: "Swipe through short, 30-second video pitches\nhighlighting quick overview and problem / solution snapshot.",
                 color: "#4FC3F7",
               },
               {
-                icon: TrendingUp,
-                title: "Signals",
-                description: "Velocity, on‑time rate, acceptance rate, and user traction.",
+                icon: File,
+                title: "Deeper Dive",
+                description: "Interested in a pitch?\nClick to open the full innovation profile with detailed pitch decks and team info",
+                color: "#7C4DFF", 
+                
+              },
+              {
+                icon: Users,
+                title: "Team & Contact",
+                description: "Velocity, on-time rate, acceptance rate, and user traction.",
                 color: "#7C4DFF",
               },
+              {
+                icon: Search,
+                title: "Filter & Sort",
+                description: "By space, stage, velocity, and milestone risk.",
+                color: "#4FC3F7",
+
+              },
+              
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -143,78 +154,7 @@ export default function ForInvestorsPage() {
           </div>
         </div>
       </section>
-
-      {/* Funding Models Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#0f0a1f] to-[#0a0a1a]" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl mb-4">Funding models</h2>
-            <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              Transparent milestone-based funding with escrow protection
-            </p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  icon: DollarSign,
-                  title: "Milestone tranches",
-                  description: "Release capital when work is accepted.",
-                  color: "#4FC3F7",
-                },
-                {
-                  icon: Shield,
-                  title: "Escrow protection",
-                  description: "Funds held until criteria met.",
-                  color: "#7C4DFF",
-                },
-                {
-                  icon: TrendingUp,
-                  title: "Follow‑on capital",
-                  description: "Optional additional capital after predefined traction.",
-                  color: "#4FC3F7",
-                },
-                {
-                  icon: MessageSquare,
-                  title: "Syndicates",
-                  description: "Co‑invest with other verified investors.",
-                  color: "#7C4DFF",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all"
-                >
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{
-                      background: `linear-gradient(135deg, ${item.color}30, ${item.color}10)`,
-                      border: `1px solid ${item.color}50`,
-                    }}
-                  >
-                    <item.icon className="w-6 h-6" style={{ color: item.color }} />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-white/60 text-sm">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* Actions You Can Take Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[#0a0a1a]" />
@@ -226,38 +166,22 @@ export default function ForInvestorsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4">Actions you can take</h2>
+            <h2 className="text-4xl md:text-5xl mb-4">How We Ensure Quality</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              Full control over your investment process
+              We ensure quality by using our AI-powered vetting algorithm to filter out low-quality pitches.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="flex flex-wrap gap-4 justify-center">
             {[
-              {
-                icon: Search,
-                title: "Filter & Sort",
-                description: "By space, stage, velocity, and milestone risk.",
-                color: "#4FC3F7",
-              },
-              {
-                icon: MessageSquare,
-                title: "Ask & Track",
-                description: "Post questions, request artifacts, subscribe to updates.",
-                color: "#7C4DFF",
-              },
-              {
-                icon: DollarSign,
-                title: "Commit by milestone",
-                description: "Stage capital per tranche; escrow releases on acceptance.",
-                color: "#4FC3F7",
-              },
-              {
-                icon: CheckCircle,
-                title: "Monitor progress",
-                description: "Track build velocity, on‑time rate, and acceptance metrics.",
-                color: "#7C4DFF",
-              },
+             {
+              icon: AtomIcon,
+              title: "AI-Powered veting Algorithm",
+              description: "Our smart algorithms vet and filter out low-quality pitches\nso you only see the most promising innovations that match your interests.\nIt's like having a personalized feed of Ventures curated just for you.",
+              color: "#4FC3F7",
+
+            },
+              
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -297,7 +221,7 @@ export default function ForInvestorsPage() {
             className="mt-12 text-center"
           >
             <p className="text-white/60 max-w-2xl mx-auto">
-              Optional NDAs for sensitive materials; access is limited to verified investor accounts during beta.
+              Enter the beta and get access to the platform.
             </p>
           </motion.div>
         </div>
@@ -370,6 +294,6 @@ export default function ForInvestorsPage() {
           </motion.div>
         </div>
       </section>
-      </div>
+    </div>
   );
 }

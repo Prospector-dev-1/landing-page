@@ -1,3 +1,4 @@
+import {React} from "react";
 import { Hero } from "../components/Hero";
 import { PersonaCards } from "../components/PersonaCards";
 import { HowItWorks } from "../components/HowItWorks";
