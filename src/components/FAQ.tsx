@@ -83,7 +83,7 @@ export function FAQ() {
           >
             <p className="text-white/60 mb-4">Still have questions?</p>
             <a
-              href="#"
+              href="mailto:team@fishtank.vc"
               className="text-[#4FC3F7] hover:text-[#7C4DFF] transition-colors"
             >
               Get in touch with our team →
