@@ -155,7 +155,7 @@ export default function ForInvestorsPage() {
         </div>
       </section>
       
-      {/* Actions You Can Take Section */}
+      {/* how we ensure quality */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[#0a0a1a]" />
         

@@ -1,6 +1,6 @@
 import {React} from "react";
 import { motion } from "motion/react";
-import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle } from "lucide-react";
+import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -50,7 +50,7 @@ export default function ForCreatorsPage() {
 
               <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
                 Choose projects that match your skills, earn cash, equity, or commission, 
-                and build a portfolio with verified outcomes and milestone-linked payouts.
+                and build a portfolio with verified outcomes.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
@@ -59,16 +59,7 @@ export default function ForCreatorsPage() {
                     size="lg"
                     className="bg-gradient-to-r from-[#7C4DFF] to-[#4FC3F7] hover:opacity-90 transition-opacity rounded-2xl px-8"
                   >
-                    Join Waitlist
-                  </Button>
-                </Link>
-                <Link to="/investors">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/20 hover:bg-white/10 rounded-2xl px-8"
-                  >
-                    See investor safeguards
+                    Join The Waitlist
                   </Button>
                 </Link>
               </div>
@@ -93,26 +84,30 @@ export default function ForCreatorsPage() {
           >
             <h2 className="text-4xl md:text-5xl mb-4">Who are Creators?</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              Creators are the builders who turn startups into products and growth
+              Creators are Freelancers, Interns, and other talent
+              <br />
+              who can help build or scale innovation for either a fixed pay, Equity, or even Commission.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                icon: Code,
-                title: "Engineering & Product",
+                icon: TrendingUp,
+                title: "Marketing & Sales",
                 items: [
-                  "Frontend Engineer (React/Next)",
-                  "Backend Engineer (Node/Python)",
-                  "Mobile Dev (React Native/Flutter)",
-                  "Full‑stack Engineer",
-                  "Product Manager",
-                ],
+                  "Sales Funnel Expert ",
+                  "Outreach Manager",
+                  "Product Description Copywriter ",
+                  "Paid Ads Specialist ",
+                  "Email Marketing Expert ",
+                  "CRM Expert ",
+                  "Business Plan Writer", 
+               ],
                 color: "#4FC3F7",
               },
               {
-                icon: Palette,
+                icon: Wrench,
                 title: "Design & Content",
                 items: [
                   "Product Designer (UI/UX)",
@@ -125,13 +120,15 @@ export default function ForCreatorsPage() {
               },
               {
                 icon: TrendingUp,
-                title: "Growth & Ops",
+                title: "Operations & Support",
                 items: [
-                  "Growth Marketer",
-                  "SEO/Content Marketer",
-                  "Community Manager",
-                  "Sales / SDR",
-                  "Data Analyst",
+                  "Product Manager",
+                  "Product Support Engineer ",
+                  "Product Support Specialist ",
+                  "Recruiter ",
+                  "HR Specialist ",
+                  "Legal Specialist ",
+                  "Market Research Analyst",
                 ],
                 color: "#4FC3F7",
               },
@@ -176,6 +173,10 @@ export default function ForCreatorsPage() {
               </motion.div>
             ))}
           </div>
+          
+            
+          
+        
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
