@@ -234,7 +234,7 @@ export default function ForInvestorsPage() {
           className="absolute inset-0"
           animate={{
             background: [
-              "radial-gradient(circle at 30% 50%, #4FC3F730 0%, transparent 50%)",
+              "radial-gradient(circle at 30% 50%,hsla(199, 91.30%, 63.90%, 0.17) 0%, transparent 50%)",
               "radial-gradient(circle at 70% 50%, #7C4DFF30 0%, transparent 50%)",
               "radial-gradient(circle at 30% 50%, #4FC3F730 0%, transparent 50%)",
             ],
