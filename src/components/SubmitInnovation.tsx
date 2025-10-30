@@ -4,9 +4,10 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { CheckCircle2, Sparkles, Briefcase, Rocket, User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import React from "react";
+import { toast } from "sonner";
 
 type Role = "investor" | "innovator" | "creator";
 
@@ -53,15 +54,32 @@ export function SubmitInnovation() {
   const [feedbackData, setFeedbackData] = useState({ name: "", email: "", message: "" });
   const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+  const honeypotRefApply = useRef<HTMLInputElement | null>(null);
+  const honeypotRefFeedback = useRef<HTMLInputElement | null>(null);
+  const formStartMsApply = useRef<number>(Date.now());
+  const formStartMsFeedback = useRef<number>(Date.now());
+
+  useEffect(() => {
+    formStartMsApply.current = Date.now();
+    formStartMsFeedback.current = Date.now();
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (honeypotRefApply.current && honeypotRefApply.current.value) {
+      toast.error("Submission blocked.");
+      return;
+    }
+    if (Date.now() - formStartMsApply.current < 3000) {
+      toast.error("Please take a moment to complete the form.");
+      return;
+    }
     const missingFields = fieldsByRole[role]
       .filter((f) => f.required && !formData[f.key])
       .map((f) => f.label);
 
     if (missingFields.length > 0) {
-      alert("Please fill: " + missingFields.join(", "));
+      toast.error("Please fill: " + missingFields.join(", "));
       return;
     }
 
@@ -71,7 +89,7 @@ export function SubmitInnovation() {
     const sheet = (env.VITE_SHEETS_TAB_APPLY as string) || "Apply";
 
     if (!url || !apiKey) {
-      alert("Submission service not configured.");
+      toast.error("Submission service not configured.");
       return;
     }
 
@@ -100,14 +118,15 @@ export function SubmitInnovation() {
           setSubmitMessage(
             `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
           );
+          toast.success("Application submitted.");
           setFormData({});
         } else {
-          alert("Error: " + (result.error || "Submission failed"));
+          toast.error("Error: " + (result.error || "Submission failed"));
         }
       })
       .catch((err) => {
         console.error(err);
-        alert("There was an error submitting your application. Please try again later.");
+        toast.error("There was an error submitting your application. Please try again later.");
       })
       .finally(() => setSubmitting(false));
   };
@@ -213,6 +232,16 @@ export function SubmitInnovation() {
             className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot field - hidden from users */}
+              <input
+                ref={honeypotRefApply}
+                type="text"
+                name="company_website"
+                autoComplete="off"
+                tabIndex={-1}
+                className="hidden"
+                aria-hidden="true"
+              />
               {/* Role selector */}
               <div className="flex flex-wrap gap-3">
                 <button
@@ -335,8 +364,16 @@ export function SubmitInnovation() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  if (honeypotRefFeedback.current && honeypotRefFeedback.current.value) {
+                    toast.error("Submission blocked.");
+                    return;
+                  }
+                  if (Date.now() - formStartMsFeedback.current < 3000) {
+                    toast.error("Please take a moment to complete the form.");
+                    return;
+                  }
                   if (!feedbackData.name || !feedbackData.email || !feedbackData.message) {
-                    alert("Please fill: Name, Email, and Question/Feature");
+                    toast.error("Please fill: Name, Email, and Question/Feature");
                     return;
                   }
                   const env = (import.meta as any).env as Record<string, string>;
@@ -345,7 +382,7 @@ export function SubmitInnovation() {
                   const sheet = (env.VITE_SHEETS_TAB_FEEDBACK as string) || "Feedback";
 
                   if (!url || !apiKey) {
-                    alert("Submission service not configured.");
+                    toast.error("Submission service not configured.");
                     return;
                   }
 
@@ -370,18 +407,29 @@ export function SubmitInnovation() {
                       if (result.ok) {
                         setFeedbackMessage("Thanks! We received your message.");
                         setFeedbackData({ name: "", email: "", message: "" });
+                        toast.success("Message sent.");
                       } else {
-                        alert("Error: " + (result.error || "Submission failed"));
+                        toast.error("Error: " + (result.error || "Submission failed"));
                       }
                     })
                     .catch((err) => {
                       console.error(err);
-                      alert("There was an error submitting your message. Please try again later.");
+                      toast.error("There was an error submitting your message. Please try again later.");
                     })
                     .finally(() => setFeedbackSubmitting(false));
                 }}
                 className="space-y-4"
               >
+                {/* Honeypot field - hidden from users */}
+                <input
+                  ref={honeypotRefFeedback}
+                  type="text"
+                  name="company_website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div>
                   <Label htmlFor="fb_name" className="text-white/90">Name</Label>
                   <Input

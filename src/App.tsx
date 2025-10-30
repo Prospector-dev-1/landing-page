@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Toaster } from "sonner";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import HomePage from "./pages/HomePage";
@@ -72,6 +73,7 @@ export default function App() {
           />
         </Routes>
         <Footer />
+        <Toaster richColors position="top-center" />
       </div>
     </BrowserRouter>
   );

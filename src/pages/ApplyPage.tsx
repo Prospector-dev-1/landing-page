@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ContentCard } from "../components/ContentCard";
 import { Button } from "../components/ui/button";
 import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { CheckCircle2, Sparkles, User, Briefcase, Rocket } from "lucide-react";
+import { toast } from "sonner";
 
 type Role = "investor" | "innovator" | "creator";
 
@@ -48,15 +49,30 @@ export default function ApplyPage() {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
+  const honeypotRef = useRef<HTMLInputElement | null>(null);
+  const formStartMs = useRef<number>(Date.now());
+
+  useEffect(() => {
+    formStartMs.current = Date.now();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Anti-spam: honeypot + min time-on-form
+    if (honeypotRef.current && honeypotRef.current.value) {
+      toast.error("Submission blocked.");
+      return;
+    }
+    if (Date.now() - formStartMs.current < 3000) {
+      toast.error("Please take a moment to complete the form.");
+      return;
+    }
     const missingFields = fieldsByRole[role]
       .filter((f) => f.required && !formData[f.key])
       .map((f) => f.label);
     
     if (missingFields.length > 0) {
-      alert("Please fill: " + missingFields.join(", "));
+      toast.error("Please fill: " + missingFields.join(", "));
       return;
     }
     
@@ -66,7 +82,7 @@ export default function ApplyPage() {
     const sheet = (env.VITE_SHEETS_TAB_APPLY as string) || "Apply";
 
     if (!url || !apiKey) {
-      alert("Submission service not configured.");
+      toast.error("Submission service not configured.");
       return;
     }
 
@@ -95,14 +111,15 @@ export default function ApplyPage() {
           setSubmitMessage(
             `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
           );
+          toast.success("Application submitted.");
           setFormData({});
         } else {
-          alert("Error: " + (result.error || "Submission failed"));
+          toast.error("Error: " + (result.error || "Submission failed"));
         }
       })
       .catch((err) => {
         console.error(err);
-        alert("There was an error submitting your application. Please try again later.");
+        toast.error("There was an error submitting your application. Please try again later.");
       })
       .finally(() => setSubmitting(false));
   };
@@ -260,6 +277,16 @@ export default function ApplyPage() {
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field - hidden from users */}
+                <input
+                  ref={honeypotRef}
+                  type="text"
+                  name="company_website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <ContentCard className="space-y-4 bg-white/5 backdrop-blur-xl border-white/10">
                   {fields.map((field) => renderField(field))}
                 </ContentCard>
