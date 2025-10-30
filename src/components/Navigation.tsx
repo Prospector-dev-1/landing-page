@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Waves, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import React from "react";
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
 

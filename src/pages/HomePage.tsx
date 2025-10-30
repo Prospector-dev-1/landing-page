@@ -3,7 +3,6 @@ import { Hero } from "../components/Hero";
 import { PersonaCards } from "../components/PersonaCards";
 import { HowItWorks } from "../components/HowItWorks";
 import { SubmitInnovation } from "../components/SubmitInnovation";
-import { SocialProof } from "../components/SocialProof";
 import { FAQ } from "../components/FAQ";
 import { CTABanner } from "../components/CTABanner";
 
@@ -14,7 +13,6 @@ export default function HomePage() {
       <PersonaCards />
       <HowItWorks />
       <SubmitInnovation />
-      <SocialProof />
       <FAQ />
       <CTABanner />
     </div>

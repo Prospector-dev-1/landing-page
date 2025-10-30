@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PageHeading } from "../components/PageHeading";
-import { Section } from "../components/Section";
 import { ContentCard } from "../components/ContentCard";
 import { Button } from "../components/ui/button";
 import { motion } from "motion/react";
+import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { CheckCircle2, Sparkles, User, Briefcase, Rocket } from "lucide-react";
 
 type Role = "investor" | "innovator" | "creator";
@@ -45,7 +44,7 @@ const fieldsByRole: Record<Role, Field[]> = {
 };
 
 export default function ApplyPage() {
-  const [role, setRole] = useState<Role>("investor");
+  const [role, setRole] = useState<Role>("innovator");
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
@@ -180,112 +179,137 @@ export default function ApplyPage() {
   const fields = fieldsByRole[role];
 
   return (
-    <Section className="py-16 relative overflow-hidden">
-      {/* Subtle animated background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute -top-24 -left-24 w-[380px] h-[380px] rounded-full opacity-20 blur-[120px]"
-          animate={{ backgroundColor: ["#4FC3F7", "#7C4DFF", "#4FC3F7"] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-24 -right-24 w-[300px] h-[300px] rounded-full opacity-10 blur-[120px]"
-          animate={{ backgroundColor: ["#7C4DFF", "#4FC3F7", "#7C4DFF"] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4">
-            <Sparkles className="w-4 h-4 text-[#4FC3F7]" />
-            <span className="text-sm text-white/70">Limited beta access</span>
-          </div>
-          <PageHeading
-            title="Join the Fishtank Waitlist"
-            subtitle="Tell us who you are. We'll tailor the form and keep you in the loop."
+    <div className="min-h-screen bg-[#0a0a1a] text-white">
+      {/* Single centered form layout */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
+          <AnimatedRadialBackground
+            className="opacity-70"
+            colors={["rgba(34,197,94,0.35)", "rgba(245,158,11,0.30)", "rgba(34,197,94,0.35)"]}
+            durationSeconds={10}
           />
         </div>
 
-        {/* Role selector */}
-        <div className="flex flex-wrap gap-3 mb-10 justify-center">
-          <button
-            onClick={() => setRole("investor")}
-            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
-              role === "investor"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
-                : "border-white/10 bg-white/5 hover:border-white/20"
-            }`}
-          >
-            <Briefcase className="w-4 h-4" /> Investor
-          </button>
-          <button
-            onClick={() => setRole("innovator")}
-            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
-              role === "innovator"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
-                : "border-white/10 bg-white/5 hover:border-white/20"
-            }`}
-          >
-            <Rocket className="w-4 h-4" /> Innovator
-          </button>
-          <button
-            onClick={() => setRole("creator")}
-            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
-              role === "creator"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
-                : "border-white/10 bg-white/5 hover:border-white/20"
-            }`}
-          >
-            <User className="w-4 h-4" /> Creator
-          </button>
-        </div>
-
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <ContentCard className="mb-6 space-y-4 bg-white/5 backdrop-blur-xl border-white/10">
-                {fields.map((field) => renderField(field))}
-              </ContentCard>
-
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  type="submit"
-                  disabled={submitting}
-                  className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl px-6"
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
                 >
-                  {submitting ? "Submitting..." : "Join Waitlist"}
-                </Button>
-                <Link to="/">
-                  <Button variant="outline" className="border-white/20 hover:bg-white/10 rounded-xl">
-                    Back to Home
-                  </Button>
-                </Link>
-              </div>
-              {submitMessage && (
-                <p className="text-sm text-white/70">{submitMessage}</p>
-              )}
-            </form>
-          </div>
+                  <Sparkles className="w-4 h-4 text-[#4FC3F7]" />
+                  <span className="text-sm text-white/70">Limited beta access</span>
+                </motion.div>
 
-          {/* Sidebar benefits */}
-          <div>
-            <ContentCard className="bg-white/5 backdrop-blur-xl border-white/10">
-              <h3 className="text-lg font-semibold mb-4">What you get</h3>
-              <ul className="space-y-3 text-white/70 text-sm">
-                {["Curated matches to your goals","Milestone-based clarity","Early access to launches","Concierge onboarding in beta"].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 mt-0.5 text-[#4FC3F7]" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-white/40 mt-4">We review applications within 48 hours.</p>
-            </ContentCard>
+                <h1 className="text-5xl md:text-6xl mb-4 bg-gradient-to-r from-white via-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
+                  Join the Waitlist
+                </h1>
+
+                <p className="text-lg text-white/60 max-w-2xl mx-auto mb-8">
+                  Tell us who you are. We'll tailor the form and keep you in the loop.
+                </p>
+
+                {/* Role selector */}
+                <div className="flex flex-wrap gap-3 justify-center">
+                  <button
+                    onClick={() => setRole("investor")}
+                    className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                      role === "investor"
+                        ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
+                        : "border-white/20 bg-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    <Briefcase className="w-4 h-4" /> Investor
+                  </button>
+                  <button
+                    onClick={() => setRole("innovator")}
+                    className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                      role === "innovator"
+                        ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
+                        : "border-white/20 bg-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    <Rocket className="w-4 h-4" /> Innovator
+                  </button>
+                  <button
+                    onClick={() => setRole("creator")}
+                    className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                      role === "creator"
+                        ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
+                        : "border-white/20 bg-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    <User className="w-4 h-4" /> Creator
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Centered form */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <ContentCard className="space-y-4 bg-white/5 backdrop-blur-xl border-white/10">
+                  {fields.map((field) => renderField(field))}
+                </ContentCard>
+
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    size="lg"
+                    className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl px-8"
+                  >
+                    {submitting ? "Submitting..." : "Join Waitlist"}
+                  </Button>
+                  <Link to="/">
+                    <Button variant="outline" size="lg" className="border-white/20 hover:bg-white/10 rounded-xl">
+                      Back to Home
+                    </Button>
+                  </Link>
+                </div>
+                {submitMessage && (
+                  <p className="text-sm text-white/70">{submitMessage}</p>
+                )}
+              </form>
+            </motion.div>
+
+            {/* Benefits footer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-12 text-center"
+            >
+              <div className="inline-flex flex-wrap gap-6 justify-center text-sm text-white/60">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#4FC3F7]" />
+                  <span>Curated matches</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#4FC3F7]" />
+                  <span>48hr verification</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#4FC3F7]" />
+                  <span>Free to join</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-    </Section>
+      </section>
+    </div>
   );
 }

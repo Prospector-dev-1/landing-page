@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
+import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { TrendingUp, File, Shield, AtomIcon, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
@@ -10,17 +11,10 @@ export default function ForInvestorsPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
-          <motion.div
-            className="absolute inset-0 opacity-30"
-            animate={{
-              background: [
-                "radial-gradient(circle at 20% 50%, #4FC3F7 0%, transparent 50%)",
-                "radial-gradient(circle at 80% 50%, #7C4DFF 0%, transparent 50%)",
-                "radial-gradient(circle at 50% 80%, #4FC3F7 0%, transparent 50%)",
-                "radial-gradient(circle at 20% 50%, #4FC3F7 0%, transparent 50%)",
-              ],
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          <AnimatedRadialBackground
+            className="opacity-30"
+            colors={["#F43F5E", "#34D399", "#F43F5E"]}
+            durationSeconds={10}
           />
         </div>
 
@@ -230,16 +224,10 @@ export default function ForInvestorsPage() {
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]" />
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              "radial-gradient(circle at 30% 50%,hsla(199, 91.30%, 63.90%, 0.17) 0%, transparent 50%)",
-              "radial-gradient(circle at 70% 50%, #7C4DFF30 0%, transparent 50%)",
-              "radial-gradient(circle at 30% 50%, #4FC3F730 0%, transparent 50%)",
-            ],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
+        <AnimatedRadialBackground
+          className=""
+          colors={["#F43F5E30", "#34D39930", "#F43F5E30"]}
+          durationSeconds={8}
         />
 
         <div className="container mx-auto px-4 relative z-10">

@@ -1,4 +1,6 @@
+import React from "react";
 import { motion } from "motion/react";
+import AnimatedRadialBackground from "./AnimatedRadialBackground";
 import { Button } from "./ui/button";
 import { Sparkles, Rocket, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -8,17 +10,10 @@ export function Hero() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
-        <motion.div
-          className="absolute inset-0 opacity-30"
-          animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, #7C4DFF 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, #4FC3F7 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, #7C4DFF 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, #7C4DFF 0%, transparent 50%)",
-            ],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        <AnimatedRadialBackground
+          className="opacity-30"
+          colors={["#7C4DFF", "#4FC3F7", "#7C4DFF"]}
+          durationSeconds={10}
         />
       </div>
 
