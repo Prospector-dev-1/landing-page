@@ -15,6 +15,8 @@ export function SubmitInnovation() {
     startup: "",
     category: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +32,48 @@ export function SubmitInnovation() {
       return;
     }
 
-    alert("Thanks! Your innovation was submitted.");
+    const env = (import.meta as any).env as Record<string, string>;
+    const url = env.VITE_APPS_SCRIPT_URL as string;
+    const apiKey = env.VITE_API_KEY as string;
+    const sheet = (env.VITE_SHEETS_TAB_INNOVATION as string) || "Innovation";
+
+    if (!url || !apiKey) {
+      alert("Submission service not configured.");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitMessage(null);
+    const payload = {
+      key: apiKey,
+      sheet,
+      form: "innovation",
+      data: formData,
+    };
+    const body = new URLSearchParams();
+    body.set("json", JSON.stringify(payload));
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body.toString(),
+    })
+      .then(async (res) => {
+        const result = await res.json();
+        if (result.ok) {
+          setSubmitMessage("Thanks! Your innovation was submitted.");
+          setFormData({ name: "", email: "", startup: "", category: "" });
+        } else {
+          alert("Error: " + (result.error || "Submission failed"));
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("There was an error submitting your innovation. Please try again later.");
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
@@ -123,15 +166,19 @@ export function SubmitInnovation() {
               <Button
                 size="lg"
                 type="submit"
+                disabled={submitting}
                 className="w-full bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
-                Submit Application
+                {submitting ? "Submitting..." : "Submit Application"}
               </Button>
 
               <p className="text-xs text-white/40 text-center">
                 We review all submissions within 48 hours
               </p>
+              {submitMessage && (
+                <p className="text-sm text-white/70 text-center">{submitMessage}</p>
+              )}
             </form>
           </motion.div>
 

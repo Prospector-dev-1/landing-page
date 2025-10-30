@@ -47,6 +47,8 @@ const fieldsByRole: Record<Role, Field[]> = {
 export default function ApplyPage() {
   const [role, setRole] = useState<Role>("investor");
   const [formData, setFormData] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,7 +61,51 @@ export default function ApplyPage() {
       return;
     }
     
-    alert(`Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`);
+    const env = (import.meta as any).env as Record<string, string>;
+    const url = env.VITE_APPS_SCRIPT_URL as string;
+    const apiKey = env.VITE_API_KEY as string;
+    const sheet = (env.VITE_SHEETS_TAB_APPLY as string) || "Apply";
+
+    if (!url || !apiKey) {
+      alert("Submission service not configured.");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitMessage(null);
+    const payload = {
+      key: apiKey,
+      sheet,
+      form: "apply",
+      role,
+      data: formData,
+    };
+    const body = new URLSearchParams();
+    body.set("json", JSON.stringify(payload));
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body.toString(),
+    })
+      .then(async (res) => {
+        const result = await res.json();
+        if (result.ok) {
+          setSubmitMessage(
+            `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
+          );
+          setFormData({});
+        } else {
+          alert("Error: " + (result.error || "Submission failed"));
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("There was an error submitting your application. Please try again later.");
+      })
+      .finally(() => setSubmitting(false));
   };
 
   const handleInputChange = (key: string, value: string) => {
@@ -206,9 +252,10 @@ export default function ApplyPage() {
               <div className="flex flex-wrap gap-3">
                 <Button
                   type="submit"
+                  disabled={submitting}
                   className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl px-6"
                 >
-                  Join Waitlist
+                  {submitting ? "Submitting..." : "Join Waitlist"}
                 </Button>
                 <Link to="/">
                   <Button variant="outline" className="border-white/20 hover:bg-white/10 rounded-xl">
@@ -216,6 +263,9 @@ export default function ApplyPage() {
                   </Button>
                 </Link>
               </div>
+              {submitMessage && (
+                <p className="text-sm text-white/70">{submitMessage}</p>
+              )}
             </form>
           </div>
 
