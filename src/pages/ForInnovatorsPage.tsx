@@ -1,6 +1,6 @@
 import {React} from "react";
 import { motion } from "motion/react";
-import { Lightbulb, Rocket, Users, Shield, Hammer, CheckCircle, Wrench, WrenchIcon } from "lucide-react";
+import { Lightbulb, Rocket, Users, Shield, Hammer, Plus, CheckCircle, Wrench, WrenchIcon, HelpCircle } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -254,7 +254,7 @@ export default function ForInnovatorsPage() {
           >
               <h2 className="text-4xl md:text-5xl mb-4">Beta Application Requirements</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              What we need to evaluate your application
+              What we need, and why we need it, to evaluate your application
             </p>
           </motion.div>
 
@@ -268,17 +268,12 @@ export default function ForInnovatorsPage() {
                   color: "#4FC3F7",
                 },
                 {
-                  icon: Wrench,
+                  icon: Plus,
                   title: "Aditional information (optional)",
                   description: "Either your Pitchdeck, or a 60–120s walkthrough showing your product in action (can be a prototype).",
-                  color: "#7C4DFF",
-                },
-                {
-                  icon: WrenchIcon,
-                  title: "Why?",
-                  description: "To ensure quality, we must prevent phony Innovations from reaching FishTank.",
                   color: "#4FC3F7",
                 },
+                
                 
               ].map((item, index) => (
                 <motion.div
@@ -310,6 +305,46 @@ export default function ForInnovatorsPage() {
                 </motion.div>
               ))}
             </div>
+            <div className="flex flex-wrap gap-4 justify-center mt-12">
+            {[
+             {
+              icon: HelpCircle,
+              title: "Why?",
+              description: "To keep FishTank authentic, only verified innovations make it through — no fakes, just real founders with real Innovations. Most applications are approved; our review simply filters out bots or duplicate accounts to keep things fair for everyone. Everything you submit is seen only by FishTank’s moderators for verification.",
+              color: "#7C4DFF",
+            },
+              
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group relative"
+              >
+                <div className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(135deg, ${item.color}40, ${item.color}20)`,
+                  }}
+                />
+                <div className="relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all">
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.color}30, ${item.color}10)`,
+                      border: `1px solid ${item.color}50`,
+                    }}
+                  >
+                    <item.icon className="w-8 h-8" style={{ color: item.color }} />
+                  </div>
+                  <h3 className="text-2xl mb-4">{item.title}</h3>
+                  <p className="text-white/60">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -362,7 +397,7 @@ export default function ForInnovatorsPage() {
                 </motion.div>
 
                 <h2 className="text-4xl md:text-6xl mb-6">
-                  Ready to <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
+                  Are you ready to <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
                     Start-up?
                   </span>
                 </h2>  

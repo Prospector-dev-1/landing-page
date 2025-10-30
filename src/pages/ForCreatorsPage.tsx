@@ -1,6 +1,6 @@
 import {React} from "react";
 import { motion } from "motion/react";
-import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench } from "lucide-react";
+import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench, Brain, Plus } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -173,7 +173,46 @@ export default function ForCreatorsPage() {
               </motion.div>
             ))}
           </div>
-          
+          <div className="flex flex-wrap gap-4 justify-center mt-12">
+            {[
+             {
+              icon: Plus, 
+              title: "And So Much More",
+              description: "If startups need it, and you have it, FishTank is perfect for you",
+              color: "#4FC3F7",
+            },
+              
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group relative"
+              >
+                <div className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(135deg, ${item.color}40, ${item.color}20)`,
+                  }}
+                />
+                <div className="relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all">
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.color}30, ${item.color}10)`,
+                      border: `1px solid ${item.color}50`,
+                    }}
+                  >
+                    <item.icon className="w-8 h-8" style={{ color: item.color }} />
+                  </div>
+                  <h3 className="text-2xl mb-4">{item.title}</h3>
+                  <p className="text-white/60">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
             
           
         
