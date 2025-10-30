@@ -1,4 +1,4 @@
-import {React} from "react";
+import React from "react";
 import { motion } from "motion/react";
 import { TrendingUp, File, Shield, AtomIcon, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -64,7 +64,7 @@ export default function ForInvestorsPage() {
                     variant="outline"
                     className="border-white/20 hover:bg-white/10 rounded-2xl px-8"
                   >
-                 <Link to="/learn-more?tab=investors">Learn More</Link>
+                 <Link to="/">Learn More</Link>
                 </Button>
               </div>
             </motion.div>
@@ -278,12 +278,14 @@ export default function ForInvestorsPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-10"
-                  >
-                    Request Verification
-                  </Button>
+                  <Link to="/apply">
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-10"
+                    >
+                      Request Verification
+                    </Button>
+                  </Link>
                 </div>
 
                 <p className="mt-8 text-sm text-white/40">

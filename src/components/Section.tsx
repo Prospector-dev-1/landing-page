@@ -1,8 +1,8 @@
-import { React, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { cn } from "./ui/utils";
 
 interface SectionProps {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: "default" | "muted" | "dark";
   className?: string;
 }

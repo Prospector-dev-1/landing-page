@@ -1,11 +1,5 @@
 import { Waves } from "lucide-react";
-
-const footerLinks = {
-  Product: ["Features", "Pricing", "Security", "Roadmap"],
-  Company: ["About", "Blog", "Careers", "Press Kit"],
-  Resources: ["Documentation", "Help Center", "Community", "Contact"],
-  Legal: ["Privacy", "Terms", "Cookie Policy", "Licenses"],
-};
+import React from "react";
 
 export function Footer() {
   return (
@@ -23,37 +17,7 @@ export function Footer() {
             <p className="text-white/60 text-sm max-w-xs">
               Connecting innovators, creators, and investors to build the future.
             </p>
-            <div className="flex gap-4 mt-6">
-              {["Twitter", "LinkedIn", "GitHub"].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-colors"
-                >
-                  <span className="text-xs text-white/60">{social[0]}</span>
-                </a>
-              ))}
-            </div>
           </div>
-
-          {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-white mb-4 text-sm">{category}</h3>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-white/60 hover:text-white text-sm transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
 
         {/* Bottom bar */}
@@ -61,14 +25,43 @@ export function Footer() {
           <p className="text-white/40 text-sm">
             © 2025 Fishtank. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-white/40 hover:text-white text-sm transition-colors">
-              Privacy Policy
+          <nav className="flex flex-wrap items-center gap-4 text-sm">
+            <a
+              href="https://www.linkedin.com/company/fishtankteam/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              LinkedIn
             </a>
-            <a href="#" className="text-white/40 hover:text-white text-sm transition-colors">
-              Terms of Service
+            <span className="text-white/20">•</span>
+            <a
+              href="https://x.com/fishtankkteam?s=21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              Twitter
             </a>
-          </div>
+            <span className="text-white/20">•</span>
+            <a
+              href="https://www.tiktok.com/@fishtankteam?_t=ZS-90yF2ZOh20u&_r=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              TikTok
+            </a>
+            <span className="text-white/20">•</span>
+            <a
+              href="https://www.instagram.com/fishtankteam?igsh=MWc3azV3aDNtMXY5ZA%3D%3D&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition-colors"
+            >
+              Instagram
+            </a>
+          </nav>
         </div>
       </div>
     </footer>

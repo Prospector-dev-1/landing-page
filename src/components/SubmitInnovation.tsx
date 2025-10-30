@@ -5,6 +5,8 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import type { FormEvent } from "react";
+import React from "react";
 
 export function SubmitInnovation() {
   const [formData, setFormData] = useState({
@@ -13,6 +15,23 @@ export function SubmitInnovation() {
     startup: "",
     category: "",
   });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Minimal client-side validation
+    const missing: string[] = [];
+    if (!formData.name) missing.push("Full Name");
+    if (!formData.email) missing.push("Email Address");
+    if (!formData.category) missing.push("Innovation Category");
+    if (!formData.startup) missing.push("Describe Your Startup");
+
+    if (missing.length) {
+      alert("Please fill: " + missing.join(", "));
+      return;
+    }
+
+    alert("Thanks! Your innovation was submitted.");
+  };
 
   return (
     <section id="submit" className="py-24 relative overflow-hidden">
@@ -43,7 +62,7 @@ export function SubmitInnovation() {
             viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
           >
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <Label htmlFor="name" className="text-white/90">
                   Full Name
@@ -54,6 +73,7 @@ export function SubmitInnovation() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="mt-2 bg-white/5 border-white/10 focus:border-[#4FC3F7] rounded-xl"
                   placeholder="Jane Smith"
+                  required
                 />
               </div>
 
@@ -68,6 +88,7 @@ export function SubmitInnovation() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="mt-2 bg-white/5 border-white/10 focus:border-[#4FC3F7] rounded-xl"
                   placeholder="jane@example.com"
+                  required
                 />
               </div>
 
@@ -81,6 +102,7 @@ export function SubmitInnovation() {
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   className="mt-2 bg-white/5 border-white/10 focus:border-[#4FC3F7] rounded-xl"
                   placeholder="e.g., AI, FinTech, Healthcare"
+                  required
                 />
               </div>
 
@@ -94,11 +116,13 @@ export function SubmitInnovation() {
                   onChange={(e) => setFormData({ ...formData, startup: e.target.value })}
                   className="mt-2 bg-white/5 border-white/10 focus:border-[#4FC3F7] rounded-xl min-h-[120px]"
                   placeholder="What problem does it solve? What makes it unique?"
+                  required
                 />
               </div>
 
               <Button
                 size="lg"
+                type="submit"
                 className="w-full bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
@@ -108,7 +132,7 @@ export function SubmitInnovation() {
               <p className="text-xs text-white/40 text-center">
                 We review all submissions within 48 hours
               </p>
-            </div>
+            </form>
           </motion.div>
 
           {/* Visual mock of pitch approval */}

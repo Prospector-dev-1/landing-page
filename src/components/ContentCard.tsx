@@ -1,8 +1,8 @@
-import { React, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { cn } from "./ui/utils";
 
 interface ContentCardProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 

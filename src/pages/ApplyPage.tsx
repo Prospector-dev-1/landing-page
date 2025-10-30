@@ -1,9 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PageHeading } from "../components/PageHeading";
 import { Section } from "../components/Section";
 import { ContentCard } from "../components/ContentCard";
 import { Button } from "../components/ui/button";
+import { motion } from "motion/react";
+import { CheckCircle2, Sparkles, User, Briefcase, Rocket } from "lucide-react";
 
 type Role = "investor" | "innovator" | "creator";
 
@@ -46,7 +48,7 @@ export default function ApplyPage() {
   const [role, setRole] = useState<Role>("investor");
   const [formData, setFormData] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const missingFields = fieldsByRole[role]
       .filter((f) => f.required && !formData[f.key])
@@ -132,65 +134,107 @@ export default function ApplyPage() {
   const fields = fieldsByRole[role];
 
   return (
-    <Section className="py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PageHeading
-          title="Join the Fishtank Waitlist"
-          subtitle="Tell us who you are. We'll tailor the form and keep you in the loop."
+    <Section className="py-16 relative overflow-hidden">
+      {/* Subtle animated background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute -top-24 -left-24 w-[380px] h-[380px] rounded-full opacity-20 blur-[120px]"
+          animate={{ backgroundColor: ["#4FC3F7", "#7C4DFF", "#4FC3F7"] }}
+          transition={{ duration: 8, repeat: Infinity }}
         />
-        
-        <div className="flex flex-wrap gap-3 mb-8">
+        <motion.div
+          className="absolute -bottom-24 -right-24 w-[300px] h-[300px] rounded-full opacity-10 blur-[120px]"
+          animate={{ backgroundColor: ["#7C4DFF", "#4FC3F7", "#7C4DFF"] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4">
+            <Sparkles className="w-4 h-4 text-[#4FC3F7]" />
+            <span className="text-sm text-white/70">Limited beta access</span>
+          </div>
+          <PageHeading
+            title="Join the Fishtank Waitlist"
+            subtitle="Tell us who you are. We'll tailor the form and keep you in the loop."
+          />
+        </div>
+
+        {/* Role selector */}
+        <div className="flex flex-wrap gap-3 mb-10 justify-center">
           <button
             onClick={() => setRole("investor")}
-            className={`px-4 py-2 rounded-full border transition-colors ${
+            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
               role === "investor"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20"
+                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
                 : "border-white/10 bg-white/5 hover:border-white/20"
             }`}
           >
-            Investor
+            <Briefcase className="w-4 h-4" /> Investor
           </button>
           <button
             onClick={() => setRole("innovator")}
-            className={`px-4 py-2 rounded-full border transition-colors ${
+            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
               role === "innovator"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20"
+                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
                 : "border-white/10 bg-white/5 hover:border-white/20"
             }`}
           >
-            Innovator
+            <Rocket className="w-4 h-4" /> Innovator
           </button>
           <button
             onClick={() => setRole("creator")}
-            className={`px-4 py-2 rounded-full border transition-colors ${
+            className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
               role === "creator"
-                ? "border-[#4FC3F7] bg-[#4FC3F7]/20"
+                ? "border-[#4FC3F7] bg-[#4FC3F7]/20 shadow-[0_0_0_1px_rgba(79,195,247,0.2)]"
                 : "border-white/10 bg-white/5 hover:border-white/20"
             }`}
           >
-            Creator
+            <User className="w-4 h-4" /> Creator
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <ContentCard className="mb-6 space-y-4">
-            {fields.map((field) => renderField(field))}
-          </ContentCard>
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-2">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <ContentCard className="mb-6 space-y-4 bg-white/5 backdrop-blur-xl border-white/10">
+                {fields.map((field) => renderField(field))}
+              </ContentCard>
 
-          <div className="flex flex-wrap gap-3">
-            <Button
-              type="submit"
-              className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl"
-            >
-              Join Waitlist
-            </Button>
-            <Link to="/">
-              <Button variant="outline" className="border-white/20 hover:bg-white/10 rounded-xl">
-                Back to Home
-              </Button>
-            </Link>
+              <div className="flex flex-wrap gap-3">
+                <Button
+                  type="submit"
+                  className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-xl px-6"
+                >
+                  Join Waitlist
+                </Button>
+                <Link to="/">
+                  <Button variant="outline" className="border-white/20 hover:bg-white/10 rounded-xl">
+                    Back to Home
+                  </Button>
+                </Link>
+              </div>
+            </form>
           </div>
-        </form>
+
+          {/* Sidebar benefits */}
+          <div>
+            <ContentCard className="bg-white/5 backdrop-blur-xl border-white/10">
+              <h3 className="text-lg font-semibold mb-4">What you get</h3>
+              <ul className="space-y-3 text-white/70 text-sm">
+                {["Curated matches to your goals","Milestone-based clarity","Early access to launches","Concierge onboarding in beta"].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 mt-0.5 text-[#4FC3F7]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-white/40 mt-4">We review applications within 48 hours.</p>
+            </ContentCard>
+          </div>
+        </div>
       </div>
     </Section>
   );

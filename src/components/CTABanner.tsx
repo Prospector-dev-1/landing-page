@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -70,13 +71,15 @@ export function CTABanner() {
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/20 hover:bg-white/10 rounded-2xl px-10"
-                >
-                  Schedule a Demo
-                </Button>
+                <Link to="/apply">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/20 hover:bg-white/10 rounded-2xl px-10"
+                  >
+                    Schedule a Demo
+                  </Button>
+                </Link>
               </div>
 
               <p className="mt-8 text-sm text-white/40">

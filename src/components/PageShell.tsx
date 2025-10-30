@@ -1,12 +1,12 @@
-import { ReactNode, React } from "react";
+import React, { type ReactNode } from "react";
 
 interface PageShellProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function PageShell({ children }: PageShellProps) {
   return (
-    <div className="pt-20">
+    <div id="main" className="pt-20">
       {children}
     </div>
   );

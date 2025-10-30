@@ -1,18 +1,21 @@
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { Waves, Menu } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Handle scroll effect
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
+  // Handle scroll effect with cleanup
+  useEffect(() => {
+    const onScroll = () => {
       setIsScrolled(window.scrollY > 50);
-    });
-  }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -31,6 +34,7 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
+            <Link to="/" className="text-white/70 hover:text-white transition-colors">Overview</Link>
             <Link to="/innovators" className="text-white/70 hover:text-white transition-colors">Innovators</Link>
             <Link to="/creators" className="text-white/70 hover:text-white transition-colors">Creators</Link>
             <Link to="/investors" className="text-white/70 hover:text-white transition-colors">Investors</Link>
@@ -43,13 +47,7 @@ export function Navigation() {
                 Join Beta
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden hover:bg-white/10 rounded-xl"
-            >
-              <Menu className="w-5 h-5" />
-            </Button>
+            {/* Mobile menu button removed until implemented */}
           </div>
         </div>
       </div>
