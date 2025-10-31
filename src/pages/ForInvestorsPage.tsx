@@ -4,10 +4,17 @@ import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { TrendingUp, File, Shield, AtomIcon, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { SEO } from "../components/SEO";
 
 export default function ForInvestorsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a1a] text-white">
+    <>
+      <SEO 
+        path="/investors"
+        title="For Investors — Access Reviewed Early-Stage Innovations"
+        description="Fund against milestones, monitor progress, and double down when traction proves out. Access verified startups with transparent execution tracking."
+      />
+      <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
@@ -285,5 +292,6 @@ export default function ForInvestorsPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

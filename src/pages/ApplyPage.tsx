@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { CheckCircle2, Sparkles, User, Briefcase, Rocket } from "lucide-react";
 import { toast } from "sonner";
+import { SEO } from "../components/SEO";
 
 type Role = "investor" | "innovator" | "creator";
 
@@ -196,7 +197,13 @@ export default function ApplyPage() {
   const fields = fieldsByRole[role];
 
   return (
-    <div className="min-h-screen bg-[#0a0a1a] text-white">
+    <>
+      <SEO 
+        path="/apply"
+        title="Apply to Join Fishtank — Join Beta"
+        description="Join Fishtank as an innovator, creator, or investor. Connect with curated matches, track milestones, and build with transparent execution."
+      />
+      <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Single centered form layout */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
@@ -338,5 +345,6 @@ export default function ApplyPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

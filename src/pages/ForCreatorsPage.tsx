@@ -4,10 +4,17 @@ import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench, Brain, Plus } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { SEO } from "../components/SEO";
 
 export default function ForCreatorsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a1a] text-white">
+    <>
+      <SEO 
+        path="/creators"
+        title="For Creators — Work on Real Startups Before They Launch"
+        description="Choose projects that match your skills, earn cash, equity, or commission, and build a portfolio with verified outcomes."
+      />
+      <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
@@ -410,5 +417,6 @@ export default function ForCreatorsPage() {
           </div>
       </section>
       </div>
+    </>
   );
 }

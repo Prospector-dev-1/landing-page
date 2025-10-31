@@ -4,11 +4,18 @@ import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
 import { Lightbulb, Rocket, Users, Shield, Hammer, Plus, CheckCircle, Wrench, WrenchIcon, HelpCircle } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { SEO } from "../components/SEO";
 
 
 export default function ForInnovatorsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a1a] text-white">
+    <>
+      <SEO 
+        path="/innovators"
+        title="For Innovators — Build and Scale Your Startup"
+        description="If you have been working on a product and need funding or a team to scale, join our waitlist. We verify your startup is legitimate to ensure quality, then connect you with investors and top creators."
+      />
+      <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]">
@@ -416,5 +423,6 @@ export default function ForInnovatorsPage() {
         </div>
       </section>
      </div>
+    </>
   );
 }
