@@ -1,4 +1,29 @@
+# Allow all search engines
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.env
+Disallow: /*.json$
+Disallow: /build/
 
+# Google bot specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing bot specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Allow all important pages explicitly
+Allow: /
+Allow: /innovators
+Allow: /creators
+Allow: /investors
+Allow: /apply
+
+# Sitemap location (use your actual domain)
 Sitemap: https://fishtank.vc/sitemap.xml
+
