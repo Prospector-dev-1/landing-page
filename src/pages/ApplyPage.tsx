@@ -57,7 +57,7 @@ export default function ApplyPage() {
     formStartMs.current = Date.now();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Anti-spam: honeypot + min time-on-form
     if (honeypotRef.current && honeypotRef.current.value) {
@@ -78,55 +78,55 @@ export default function ApplyPage() {
     }
     
     const env = (import.meta as any).env as Record<string, string>;
-    const url = env.VITE_APPS_SCRIPT_URL as string;
-    const apiKey = env.VITE_API_KEY as string;
-    const sheet = (env.VITE_SHEETS_TAB_APPLY as string) || "Apply";
+    const accessKey = env.VITE_WEB3FORMS_ACCESS_KEY as string;
 
-    if (!url || !apiKey) {
-      toast.error("Submission service not configured.");
+    if (!accessKey) {
+      toast.error("Form service not configured. Please add your Web3Forms access key.");
       return;
     }
 
     setSubmitting(true);
     setSubmitMessage(null);
-    const payload = {
-      key: apiKey,
-      sheet,
-      form: "apply",
-      role,
-      data: formData,
-    };
-    const body = new URLSearchParams();
-    body.set("json", JSON.stringify(payload));
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: body.toString(),
-    })
-      .then(async (res) => {
-        const result = await res.json();
-        if (result.ok) {
-          setSubmitMessage(
-            `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
-          );
-          toast.success("Application submitted.");
-          setFormData({});
-        } else {
-          toast.error("Error: " + (result.error || "Submission failed"));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("There was an error submitting your application. Please try again later.");
-      })
-      .finally(() => setSubmitting(false));
+    // Prepare form data for Web3Forms
+    const formDataToSend = new FormData();
+    formDataToSend.append("access_key", accessKey);
+    formDataToSend.append("subject", `New Application - ${role.charAt(0).toUpperCase() + role.slice(1)}`);
+    formDataToSend.append("from_name", formData.name || "Fishtank Application");
+    formDataToSend.append("role", role);
+    
+    // Add all form fields
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitMessage(
+          `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
+        );
+        toast.success("Application submitted successfully!");
+        setFormData({});
+      } else {
+        toast.error("Error: " + (result.message || "Submission failed"));
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("There was an error submitting your application. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleInputChange = (key: string, value: string) => {
-    setFormData({ ...formData, [key]: value });
+    setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const renderField = (field: Field) => {
@@ -244,6 +244,7 @@ export default function ApplyPage() {
                 {/* Role selector */}
                 <div className="flex flex-wrap gap-3 justify-center">
                   <button
+                    type="button"
                     onClick={() => setRole("investor")}
                     className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
                       role === "investor"
@@ -254,6 +255,7 @@ export default function ApplyPage() {
                     <Briefcase className="w-4 h-4" /> Investor
                   </button>
                   <button
+                    type="button"
                     onClick={() => setRole("innovator")}
                     className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
                       role === "innovator"
@@ -264,6 +266,7 @@ export default function ApplyPage() {
                     <Rocket className="w-4 h-4" /> Innovator
                   </button>
                   <button
+                    type="button"
                     onClick={() => setRole("creator")}
                     className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
                       role === "creator"

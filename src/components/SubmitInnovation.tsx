@@ -42,7 +42,7 @@ const fieldsByRole: Record<Role, Field[]> = {
     { key: "building", label: "What are you building?", type: "textarea", required: true },
     { key: "website", label: "Website or Demo (optional)", type: "url", required: false },
     { key: "deck", label: "Pitch Deck (link)", type: "url", required: false },
-    { key: "stage", label: "Stage", type: "select", options: ["Early Stage", "MVP", "Beta", "Launched", "Scaling"], required: true },
+    { key: "stage", label: "Stage", type: "select", options: ["Early Stage", "MVP", "Beta", "Launched", "Scaling"], required: false },
   ],
 };
 
@@ -64,7 +64,7 @@ export function SubmitInnovation() {
     formStartMsFeedback.current = Date.now();
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (honeypotRefApply.current && honeypotRefApply.current.value) {
       toast.error("Submission blocked.");
@@ -84,51 +84,51 @@ export function SubmitInnovation() {
     }
 
     const env = (import.meta as any).env as Record<string, string>;
-    const url = env.VITE_APPS_SCRIPT_URL as string;
-    const apiKey = env.VITE_API_KEY as string;
-    const sheet = (env.VITE_SHEETS_TAB_APPLY as string) || "Apply";
+    const accessKey = env.VITE_WEB3FORMS_ACCESS_KEY as string;
 
-    if (!url || !apiKey) {
-      toast.error("Submission service not configured.");
+    if (!accessKey) {
+      toast.error("Form service not configured. Please add your Web3Forms access key.");
       return;
     }
 
     setSubmitting(true);
     setSubmitMessage(null);
-    const payload = {
-      key: apiKey,
-      sheet,
-      form: "apply",
-      role,
-      data: formData,
-    };
-    const body = new URLSearchParams();
-    body.set("json", JSON.stringify(payload));
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: body.toString(),
-    })
-      .then(async (res) => {
-        const result = await res.json();
-        if (result.ok) {
-          setSubmitMessage(
-            `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
-          );
-          toast.success("Application submitted.");
-          setFormData({});
-        } else {
-          toast.error("Error: " + (result.error || "Submission failed"));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("There was an error submitting your application. Please try again later.");
-      })
-      .finally(() => setSubmitting(false));
+    // Prepare form data for Web3Forms
+    const formDataToSend = new FormData();
+    formDataToSend.append("access_key", accessKey);
+    formDataToSend.append("subject", `New Application - ${role.charAt(0).toUpperCase() + role.slice(1)}`);
+    formDataToSend.append("from_name", formData.name || "Fishtank Application");
+    formDataToSend.append("role", role);
+    
+    // Add all form fields
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitMessage(
+          `Thanks! You joined the waitlist as ${role.charAt(0).toUpperCase() + role.slice(1)}. We'll be in touch.`
+        );
+        toast.success("Application submitted successfully!");
+        setFormData({});
+      } else {
+        toast.error("Error: " + (result.message || "Submission failed"));
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("There was an error submitting your application. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleInputChange = (key: string, value: string) => {
@@ -154,7 +154,7 @@ export function SubmitInnovation() {
           >
             <option value="">Select...</option>
             {field.options?.map((opt) => (
-              <option key={opt} value={opt.toLowerCase()}>
+              <option key={opt} value={opt}>
                 {opt}
               </option>
             ))}
@@ -362,7 +362,7 @@ export function SubmitInnovation() {
               <h3 className="text-xl mb-2">Ask a question, or suggest a feature</h3>
               <p className="text-white/60 text-sm mb-6">We usually reply within 1–2 days</p>
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   if (honeypotRefFeedback.current && honeypotRefFeedback.current.value) {
                     toast.error("Submission blocked.");
@@ -377,46 +377,46 @@ export function SubmitInnovation() {
                     return;
                   }
                   const env = (import.meta as any).env as Record<string, string>;
-                  const url = env.VITE_APPS_SCRIPT_URL as string;
-                  const apiKey = env.VITE_API_KEY as string;
-                  const sheet = (env.VITE_SHEETS_TAB_FEEDBACK as string) || "Feedback";
+                  const accessKey = env.VITE_WEB3FORMS_ACCESS_KEY as string;
 
-                  if (!url || !apiKey) {
-                    toast.error("Submission service not configured.");
+                  if (!accessKey) {
+                    toast.error("Form service not configured. Please add your Web3Forms access key.");
                     return;
                   }
 
                   setFeedbackSubmitting(true);
                   setFeedbackMessage(null);
-                  const payload = {
-                    key: apiKey,
-                    sheet,
-                    form: "feedback",
-                    data: feedbackData,
-                  };
-                  const body = new URLSearchParams();
-                  body.set("json", JSON.stringify(payload));
 
-                  fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-                    body: body.toString(),
-                  })
-                    .then(async (res) => {
-                      const result = await res.json();
-                      if (result.ok) {
-                        setFeedbackMessage("Thanks! We received your message.");
-                        setFeedbackData({ name: "", email: "", message: "" });
-                        toast.success("Message sent.");
-                      } else {
-                        toast.error("Error: " + (result.error || "Submission failed"));
-                      }
-                    })
-                    .catch((err) => {
-                      console.error(err);
-                      toast.error("There was an error submitting your message. Please try again later.");
-                    })
-                    .finally(() => setFeedbackSubmitting(false));
+                  // Prepare form data for Web3Forms
+                  const formDataToSend = new FormData();
+                  formDataToSend.append("access_key", accessKey);
+                  formDataToSend.append("subject", "New Feedback - Fishtank");
+                  formDataToSend.append("from_name", feedbackData.name);
+                  formDataToSend.append("email", feedbackData.email);
+                  formDataToSend.append("name", feedbackData.name);
+                  formDataToSend.append("message", feedbackData.message);
+
+                  try {
+                    const response = await fetch("https://api.web3forms.com/submit", {
+                      method: "POST",
+                      body: formDataToSend,
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                      setFeedbackMessage("Thanks! We received your message.");
+                      setFeedbackData({ name: "", email: "", message: "" });
+                      toast.success("Message sent successfully!");
+                    } else {
+                      toast.error("Error: " + (result.message || "Submission failed"));
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    toast.error("There was an error submitting your message. Please try again later.");
+                  } finally {
+                    setFeedbackSubmitting(false);
+                  }
                 }}
                 className="space-y-4"
               >
