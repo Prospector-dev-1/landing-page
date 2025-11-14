@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
-import { TrendingUp, File, Shield, AtomIcon, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
+import { TrendingUp, File, Star, Shield, BotIcon, QuoteIcon, AtomIcon, MessageCircle, Clock, Search, MessageSquare, DollarSign, CheckCircle, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
@@ -59,10 +59,6 @@ export default function ForInvestorsPage() {
                 Early-stage Innovations
               </h1>
 
-              <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
-                Fund against milestones, monitor progress, and double down when traction proves out.
-              </p>
-
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button
                   size="lg"
@@ -97,10 +93,8 @@ export default function ForInvestorsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4">What you'll see</h2>
-            <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              Standardized pitch overview and transparent execution tracking
-            </p>
+            <h2 className="text-4xl md:text-5xl mb-4">What you Get</h2>
+            
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -108,30 +102,31 @@ export default function ForInvestorsPage() {
               {
                 icon: Clock,
                 title: "Quick Pitches",
-                description: "Swipe through short, 30-second video pitches\nhighlighting quick overview and problem / solution snapshot.",
+                description: "Swipe through short, ~30-60 second video pitches\nhighlighting quick overview and problem / solution snapshot.",
                 color: "#4FC3F7",
               },
               {
                 icon: File,
                 title: "Deeper Dive",
-                description: "Interested in a pitch?\nClick to open the full innovation profile with detailed pitch decks and team info",
+                description: "Interested in a pitch?\nClick to open the full innovation profile with detailed Pitchdecks, Complete demo video, Team info + experience, and more.",
                 color: "#7C4DFF", 
                 
               },
               {
-                icon: Users,
-                title: "Team & Contact",
-                description: "Velocity, on-time rate, acceptance rate, and user traction.",
-                color: "#7C4DFF",
-              },
-              {
-                icon: Search,
-                title: "Filter & Sort",
-                description: "By space, stage, velocity, and milestone risk.",
+                icon: QuoteIcon,
+                title: <p><span className="text-white/60 text-sm"><strong>coming soon</strong></span><br />Thoughts</p>,
+                description: "Share your thoughts with Founders, Investors, or both on an Innovation, pitch, or any other topic.",
                 color: "#4FC3F7",
 
               },
-              
+              {
+                icon: Star,
+                title: "Top 5 of the Day",
+                description: "The top 5 pitches of that day, displayed directly on the homepage for you to see .",
+                color: "#7C4DFF",
+
+              },
+
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -177,21 +172,38 @@ export default function ForInvestorsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4">How We Ensure Quality</h2>
+            <h2 className="text-4xl md:text-5xl mb-4"><strong>Introducing <span style={{ color: "#4FC3F7" }}>Fishtank AI</span></strong><br /></h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              We ensure quality by using our AI-powered vetting algorithm to filter out low-quality pitches.
-            </p>
+            Our <strong>AI-powered</strong> Vetting, Co-Investing & Matching Algorithms </p>
+              
           </motion.div>
 
           <div className="flex flex-wrap gap-4 justify-center">
             {[
              {
-              icon: AtomIcon,
+              icon: BotIcon,
               title: "AI-Powered veting Algorithm",
-              description: "Our smart algorithms vet and filter out low-quality pitches\nso you only see the most promising innovations that match your interests.\nIt's like having a personalized feed of Ventures curated just for you.",
+              description: <p>We ensure quality by leveraging our <strong>AI-powered</strong> vetting algorithm to filter out low-quality pitches
+               insuring the most promising innovations.</p>,
               color: "#4FC3F7",
 
             },
+            {
+              icon: MessageSquare,
+              title: <p><span className="text-white/60 text-sm"><strong>coming soon</strong></span><br />AI Co-Investor <br /></p>,
+              description: <p>Chat with <strong>Your personal AI-powered co-investor </strong> 
+              aiding you with <strong>real-time</strong> critisism, objection, and advice, providing you with different angles on whether to invest in a <strong>Innovation</strong> or not.</p>,
+              color: "#7C4DFF",
+
+            },
+            {
+              icon: AtomIcon,
+              title:  <p><span className="text-white/60 text-sm"><strong>coming soon</strong></span><br />AI-Powered Matching Algorithm</p>,
+              description: <p>Tell your algorithm what you want to see more of, and it will filter out the rest.
+              It's like having a personalized feed of Ventures curated just for you.</p>,
+              color: "#4FC3F7",
+
+            }
               
             ].map((item, index) => (
               <motion.div
@@ -231,21 +243,21 @@ export default function ForInvestorsPage() {
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <p className="text-white/60 max-w-2xl mx-auto">
-              Enter the beta and get access to the platform.
-            </p>
+           
           </motion.div>
         </div>
       </section>
-
+     
+ 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a]" /> 
         <AnimatedRadialBackground
           className=""
           colors={["#F43F5E30", "#34D39930", "#F43F5E30"]}
           durationSeconds={8}
-        />
+        ></AnimatedRadialBackground>
+        
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -253,11 +265,12 @@ export default function ForInvestorsPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
-          >
+          > 
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl border border-white/20 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full">
                 <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#4FC3F7] rounded-full blur-[120px] opacity-20" />
               </div>
+             
 
               <div className="relative z-10">
                 <motion.div
@@ -266,7 +279,7 @@ export default function ForInvestorsPage() {
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6"
                 >
-                  <TrendingUp className="w-4 h-4 text-[#4FC3F7]" />
+                  
                   <span className="text-sm text-white/80">Ready to invest?</span>
                 </motion.div>
 
@@ -288,14 +301,12 @@ export default function ForInvestorsPage() {
                       size="lg"
                       className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-10"
                     >
-                      Request Verification
+                      Join the Beta
                     </Button>
                   </Link>
                 </div>
 
-                <p className="mt-8 text-sm text-white/40">
-                  KYC/Verification required • Curated deal flow • Early-stage opportunities
-                </p>
+              
               </div>
             </div>
           </motion.div>

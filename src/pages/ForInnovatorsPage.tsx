@@ -1,7 +1,7 @@
 import {React} from "react";
 import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
-import { Lightbulb, Rocket, Users, Shield, Hammer, Plus, CheckCircle, Wrench, WrenchIcon, HelpCircle } from 'lucide-react';
+import { Rocket, Users, Shield, Hammer, Plus, CheckCircle, Wrench, WrenchIcon, HelpCircle } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
@@ -50,7 +50,7 @@ export default function ForInnovatorsPage() {
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
               >
-                <Lightbulb className="w-4 h-4 text-[#4FC3F7]" />
+                {/* <Lightbulb className="w-4 h-4 text-[#4FC3F7]" /> */}
                 <span className="text-sm text-white/70">For Innovators</span>
               </motion.div>
 
@@ -61,8 +61,7 @@ export default function ForInnovatorsPage() {
               </h1>
 
               <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
-                If you have been working on a product and need funding or a team to scale, join our waitlist. 
-                We verify your startup is legitimate to ensure quality, then connect you with investors and top creators.
+              
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
@@ -186,28 +185,28 @@ export default function ForInnovatorsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
-              {
+              { 
                 icon: Rocket,
                 title: "Investor Connections",
-                description: "Investors will see your pitch in their feed, once interested, they can easily view your full innovation's profile (pitchdeck), and send you a message directly.",
+                description: "Investors see your pitch in a TikTok-like feed, once interested, Investors will view your full Innovation profile, and send you a message directly.",
                 color: "#4FC3F7",
               },
               {
                 icon: Hammer,
                 title: "Creators",
-                description: "Onboard Freelancers, Interns, and other talent to help you build or scale your innovation for either a fixed pay, Equity, or even Commission.",
+                description: "Onboard Freelancers, Interns, or other talent to help you build and scale your innovation for either a Equity, Fixed payor even Commission.",
                 color: "#7C4DFF",
               },
               {
                 icon: Users,
                 title: "Teams",
-                description: "Connect with and create your team of other innovators, investors, and creators all in one place.",
+                description: "Connect with and build your team of Innovators, Investors, and Creators all in one place.",
                 color: "#7C4DFF",
               },
               {
                 icon: Shield,
                 title: "Optional NDA Protection",
-                description: "If turned on, Investors will have to agree to a NDA before viewing your full innovation (Your pitch will be publicly available).",
+                description: "Once Activated, Investors will have to agree to a NDA before viewing your full innovation (Your pitch will be publicly available).",
                 color: "#4FC3F7",
               }
               
@@ -397,12 +396,12 @@ export default function ForInnovatorsPage() {
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6"
                 >
-                  <Lightbulb className="w-4 h-4 text-[#4FC3F7]" />
+                  {/* <Lightbulb className="w-4 h-4 text-[#4FC3F7]" /> */}
                   <span className="text-sm text-white/80">Ready to innovate?</span>
                 </motion.div>
 
                 <h2 className="text-4xl md:text-6xl mb-6">
-                  Are you ready to <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
+                  Are you ready to <br /> <span className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">
                     Start-up?
                   </span>
                 </h2>  
@@ -419,7 +418,7 @@ export default function ForInnovatorsPage() {
                       size="lg"
                       className="bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] hover:opacity-90 transition-opacity rounded-2xl px-10"
                     >
-                      Join Waitlist
+                      Join the Beta
                     </Button>
                   </Link>
                 </div>

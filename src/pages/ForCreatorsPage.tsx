@@ -1,7 +1,7 @@
 import {React} from "react";
 import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
-import { Palette, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench, Brain, Plus } from "lucide-react";
+import { Palette, ShieldUser, Lock, Code, TrendingUp, Shield, Zap, DollarSign, Users, CheckCircle, Wrench, Brain, Plus, User, Gavel } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
@@ -49,7 +49,7 @@ export default function ForCreatorsPage() {
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-8"
               >
-                <Palette className="w-4 h-4 text-[#7C4DFF]" />
+                {/* <Palette className="w-4 h-4 text-[#7C4DFF]" /> */}
                 <span className="text-sm text-white/70">For Creators</span>
               </motion.div>
 
@@ -60,8 +60,7 @@ export default function ForCreatorsPage() {
               </h1>
 
               <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
-                Choose projects that match your skills, earn cash, equity, or commission, 
-                and build a portfolio with verified outcomes.
+              
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
@@ -95,9 +94,9 @@ export default function ForCreatorsPage() {
           >
             <h2 className="text-4xl md:text-5xl mb-4">Who are Creators?</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              Creators are Freelancers, Interns, and other talent
+              Creators are Freelancers, Interns, or anyone else who can provide a value to a startup
               <br />
-              who can help build or scale innovation for either a fixed pay, Equity, or even Commission.
+              {/* who can help build or scale innovation for either a fixed pay, Equity, or even Commission. */}
             </p>
           </motion.div>
 
@@ -189,7 +188,7 @@ export default function ForCreatorsPage() {
              {
               icon: Plus, 
               title: "And So Much More",
-              description: "If startups need it, and you have it, FishTank is perfect for you",
+              description: "If startups need it, and you have it, FishTank is for you.",
               color: "#4FC3F7",
             },
               
@@ -225,21 +224,8 @@ export default function ForCreatorsPage() {
             ))}
           </div>
             
-          
-        
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-white/60">
-              You can also propose a specialty—legal ops, compliance, localization, support engineering, and more.
-            </p>
-          </motion.div>
         </div>
-      </section>
+      </section> 
 
       {/* Pricing Benefits Section */}
       <section className="py-24 relative overflow-hidden">
@@ -252,9 +238,9 @@ export default function ForCreatorsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4">Only 5% platform commission</h2>
+            <h2 className="text-4xl md:text-5xl mb-4">You Worked for it- You keep it</h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">
-              We only earn when you earn. Comparable platforms charge around 20%—that's 75% less for you.
+             Others punish you for your work We don't.<br />You keep 100% of your earnings.<br />You Worked for it- You keep it.
             </p>
           </motion.div>
 
@@ -266,7 +252,7 @@ export default function ForCreatorsPage() {
                 viewport={{ once: true }}
                 className="bg-gradient-to-br from-[#4FC3F7]/20 to-[#4FC3F7]/10 backdrop-blur-xl border-2 border-[#4FC3F7]/50 rounded-3xl p-8 text-center"
               >
-                <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">5%</div>
+                <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent">Free</div>
                 <div className="text-white/70">Fishtank</div>
               </motion.div>
               <motion.div
@@ -280,7 +266,7 @@ export default function ForCreatorsPage() {
               </motion.div>
             </div>
             <p className="text-center text-white/60">
-              Calculation: (20% − 5%) ÷ 20% = 75% less platform fees
+              
             </p>
           </div>
         </div>
@@ -306,28 +292,34 @@ export default function ForCreatorsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                icon: Users,
-                title: "Vetted founders and investors",
-                description: "Work with vetted founders and investors—no flaky gigs.",
+                icon: ShieldUser,
+                title: "Vetted Founders & Creators",
+                description: "Work confidently, knowing the founders & creators are vetted and have a proven track record.",
                 color: "#4FC3F7",
               },
               {
                 icon: CheckCircle,
-                title: "Milestone clarity",
-                description: "Scope, success criteria, and artifacts defined upfront.",
+                title: "Be a part of the future",
+                description: "Work with Founders on the most promising innovations before they launch for a fixed price, equity, or commission before they hit mainstream.",
                 color: "#7C4DFF",
               },
               {
-                icon: Shield,
+                icon: Lock,
                 title: "Escrow protection",
-                description: "Escrow and audit trail de‑risk your time.",
+                description: "Optionally, use Escrow and audit trail to de‑risk your time and ensure you get paid for your work, by clarifying Deliverables.",
                 color: "#4FC3F7",
               },
               {
-                icon: Zap,
-                title: "Portfolio proof",
-                description: "Deliverables are verifiable, not just \"trust me\".",
+                icon: Users,
+                title: "Creator Teams",
+                description: "Join a team of creators or Build your own team for larger freelancing projects.",
                 color: "#7C4DFF",
+              },
+              {
+                icon: Gavel,
+                title: <p><span className="text-white/60 text-sm"><strong>coming soon</strong></span><br />AI Lawyer</p>,
+                description: "Create AI-powered legal contracts to protect your rights and ensure seamless collaboration without expensive lawyers.",
+                color: "#4FC3F7",
               },
             ].map((item, index) => (
               <motion.div
@@ -391,7 +383,7 @@ export default function ForCreatorsPage() {
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6"
                 >
-                  <Palette className="w-4 h-4 text-[#7C4DFF]" />
+                  {/* <Palette className="w-4 h-4 text-[#7C4DFF]" /> */}
                   <span className="text-sm text-white/80">Build with us</span>
                 </motion.div>
 
@@ -399,12 +391,12 @@ export default function ForCreatorsPage() {
                   Ready to build the
                   <br />
                   <span className="bg-gradient-to-r from-[#7C4DFF] to-[#4FC3F7] bg-clip-text text-transparent">
-                    next big thing?
+                    Next Big Thing?
                   </span>
                 </h2>
 
                 <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">
-                  Join creators building meaningful projects with talented teams and solid funding.
+                  Join Founders building the Future with talented teams and solid funding.
                 </p>
 
                 <div className="flex flex-wrap gap-4 justify-center">
@@ -413,15 +405,11 @@ export default function ForCreatorsPage() {
                       size="lg"
                       className="bg-gradient-to-r from-[#7C4DFF] to-[#4FC3F7] hover:opacity-90 transition-opacity rounded-2xl px-10"
                     >
-                      Join Waitlist
+                      Join the  Beta
               </Button>
             </Link>
-          </div>
-
-                <p className="mt-8 text-sm text-white/40">
-                  No upfront costs • 5% commission • Get paid for your craft
-                </p>
-              </div>
+            </div>
+            </div>
             </div>
           </motion.div>
           </div>
