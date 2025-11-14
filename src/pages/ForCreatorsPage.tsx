@@ -13,6 +13,16 @@ export default function ForCreatorsPage() {
         path="/creators"
         title="For Creators — Work on Real Startups Before They Launch"
         description="Choose projects that match your skills, earn cash, equity, or commission, and build a portfolio with verified outcomes."
+        keywords={[
+          "startup creators",
+          "freelance equity",
+          "collaborative startups",
+          "startup networking",
+          "creator economy",
+          "build with startups",
+          "startup social network",
+          "skills for equity"
+        ]}
       />
       <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}

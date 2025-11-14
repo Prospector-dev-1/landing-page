@@ -1,6 +1,5 @@
 import { Waves } from "lucide-react";
 import React from "react";
-
 export function Footer() {
   return (
     <footer className="relative bg-[#0a0a1a] border-t border-white/10">
@@ -9,13 +8,13 @@ export function Footer() {
           {/* Logo and tagline */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4FC3F7] to-[#7C4DFF] flex items-center justify-center">
-                <Waves className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 rounded-xl justify-center">
+                <img src="/og-image.png"/>
               </div>
               <span className="text-2xl">Fishtank</span>
             </div>
             <p className="text-white/60 text-sm max-w-xs">
-              Connecting innovators, creators, and investors to build the future.
+              Connecting Founders, with Capital and Talent to build the future.
             </p>
           </div>
         </div>
@@ -23,7 +22,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/40 text-sm">
-            © 2025 Fishtank. All rights reserved.
+            © 2025 FishTank APP INC. All rights reserved.
           </p>
           <nav className="flex flex-wrap items-center gap-4 text-sm">
             <a
@@ -36,7 +35,7 @@ export function Footer() {
             </a>
             <span className="text-white/20">•</span>
             <a
-              href="https://x.com/fishtankkteam?s=21"
+              href="https://x.com/fishtankapp"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white transition-colors"
@@ -54,7 +53,7 @@ export function Footer() {
             </a>
             <span className="text-white/20">•</span>
             <a
-              href="https://www.instagram.com/fishtankteam?igsh=MWc3azV3aDNtMXY5ZA%3D%3D&utm_source=qr"
+              href="https://www.instagram.com/fishtankteam"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white transition-colors"

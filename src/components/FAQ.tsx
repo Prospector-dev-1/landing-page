@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import { Helmet } from "react-helmet-async";
 
 const faqs = [
   {
@@ -35,8 +36,26 @@ const faqs = [
 ];
 
 export function FAQ() {
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
+
   return (
     <section id="faq" className="py-24 relative">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqStructuredData)}
+        </script>
+      </Helmet>
       <div className="absolute inset-0 bg-[#0a0a1a]" />
       
       <div className="container mx-auto px-4 relative z-10">
@@ -81,13 +100,6 @@ export function FAQ() {
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <p className="text-white/60 mb-4">Still have questions?</p>
-            <a
-              href="mailto:team@fishtank.vc"
-              className="text-[#4FC3F7] hover:text-[#7C4DFF] transition-colors"
-            >
-              Get in touch with our team →
-            </a>
           </motion.div>
         </motion.div>
       </div>

@@ -6,6 +6,11 @@ Disallow: /admin/
 Disallow: /.env
 Disallow: /*.json$
 Disallow: /build/
+Disallow: /_next/
+Disallow: /404
+Disallow: /500
+Disallow: /*?*
+Crawl-delay: 1
 
 # Google bot specific
 User-agent: Googlebot

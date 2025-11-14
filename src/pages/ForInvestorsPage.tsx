@@ -13,6 +13,16 @@ export default function ForInvestorsPage() {
         path="/investors"
         title="For Investors — Access Reviewed Early-Stage Innovations"
         description="Fund against milestones, monitor progress, and double down when traction proves out. Access verified startups with transparent execution tracking."
+        keywords={[
+          "startup investing",
+          "seed investors",
+          "pre-seed investors",
+          "venture capital platform",
+          "milestone investing",
+          "early stage startups",
+          "startup due diligence",
+          "investor networking"
+        ]}
       />
       <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}

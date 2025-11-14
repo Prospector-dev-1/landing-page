@@ -14,6 +14,16 @@ export default function ForInnovatorsPage() {
         path="/innovators"
         title="For Innovators — Build and Scale Your Startup"
         description="If you have been working on a product and need funding or a team to scale, join our waitlist. We verify your startup is legitimate to ensure quality, then connect you with investors and top creators."
+        keywords={[
+          "startup builders",
+          "founders",
+          "pre-seed funding",
+          "seed funding",
+          "startup networking",
+          "innovation platform",
+          "startup social network",
+          "founder resources"
+        ]}
       />
       <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Hero Section */}

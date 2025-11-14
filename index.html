@@ -10,7 +10,7 @@
       <meta property="og:title" content="Fishtank — Where innovators, creators, and investors meet" />
       <meta property="og:description" content="Launch and scale with curated matches, milestone tracking, and transparent execution." />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://fishtank.vc" />
+      <meta property="og:url" content="https://fishtank.vc" data-dynamic-og-url />
       <meta property="og:image" content="https://fishtank.vc/og-image.png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -18,10 +18,39 @@
       <meta name="twitter:title" content="Fishtank — Where innovators, creators, and investors meet" />
       <meta name="twitter:description" content="Launch and scale with curated matches, milestone tracking, and transparent execution." />
       <meta name="twitter:image" content="https://fishtank.vc/og-image.png" />
-      <link rel="canonical" href="https://fishtank.vc" />
+      <link rel="canonical" href="https://fishtank.vc" data-dynamic-canonical />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <meta name="googlebot" content="index, follow" />
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <script>
+        (function() {
+          try {
+            var BASE_URL = 'https://fishtank.vc';
+            var currentPath = window.location.pathname;
+            if (!currentPath) {
+              currentPath = '/';
+            }
+
+            // Normalize trailing slashes (except root)
+            if (currentPath.length > 1 && currentPath.endsWith('/')) {
+              currentPath = currentPath.slice(0, -1);
+            }
+
+            var canonicalHref = BASE_URL + (currentPath === '/' ? '' : currentPath);
+            var canonicalLink = document.querySelector('link[rel="canonical"][data-dynamic-canonical]');
+            if (canonicalLink) {
+              canonicalLink.setAttribute('href', canonicalHref);
+            }
+
+            var ogUrlMeta = document.querySelector('meta[property="og:url"][data-dynamic-og-url]');
+            if (ogUrlMeta) {
+              ogUrlMeta.setAttribute('content', canonicalHref);
+            }
+          } catch (error) {
+            console.warn('Dynamic canonical initialization failed:', error);
+          }
+        })();
+      </script>
     </head>
 
     <body>

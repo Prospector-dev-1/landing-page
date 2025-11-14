@@ -4,7 +4,7 @@ import { ContentCard } from "../components/ContentCard";
 import { Button } from "../components/ui/button";
 import { motion } from "motion/react";
 import AnimatedRadialBackground from "../components/AnimatedRadialBackground";
-import { CheckCircle2, Sparkles, User, Briefcase, Rocket } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "../components/SEO";
 
@@ -31,17 +31,16 @@ const fieldsByRole: Record<Role, Field[]> = {
     { key: "email", label: "Email", type: "email", required: true },
     { key: "name", label: "Full Name", type: "text", required: true },
     { key: "phone", label: "Phone Number", type: "tel", required: true },
-    { key: "vcfirm", label: "VC Firm?", type: "select", options: ["Yes", "No"], required: true },
+    { key: "vcfirm", label: "Are you representing a VC Firm?", type: "select", options: ["Yes", "No"], required: true },
     { key: "website", label: "Website (optional)", type: "url", required: false },
   ],
   innovator: [
+    { key: "stage", label: "Stage", type: "select", options: ["Early Stage", "MVP", "Beta", "Launched", "Scaling"], required: true },
     { key: "email", label: "Email", type: "email", required: true },
     { key: "name", label: "Full Name", type: "text", required: true },
     { key: "phone", label: "Phone Number", type: "tel", required: true },
-    { key: "building", label: "What are you building?", type: "textarea", required: true },
+    { key: "building", label: "What are you building? (optional)", type: "textarea", required: false },
     { key: "website", label: "Website or Demo (optional)", type: "url", required: false },
-    { key: "deck", label: "Pitch Deck (link)", type: "url", required: false },
-    { key: "stage", label: "Stage", type: "select", options: ["Early Stage", "MVP", "Beta", "Launched", "Scaling"], required: true },
   ],
 };
 
@@ -202,6 +201,16 @@ export default function ApplyPage() {
         path="/apply"
         title="Apply to Join Fishtank — Join Beta"
         description="Join Fishtank as an innovator, creator, or investor. Connect with curated matches, track milestones, and build with transparent execution."
+        keywords={[
+          "apply to fishtank",
+          "startup waitlist",
+          "founder application",
+          "investor application",
+          "creator application",
+          "pre-seed funding",
+          "startup collaboration",
+          "innovation network"
+        ]}
       />
       <div className="min-h-screen bg-[#0a0a1a] text-white">
       {/* Single centered form layout */}
@@ -252,7 +261,7 @@ export default function ApplyPage() {
                         : "border-white/20 bg-white/10 hover:border-white/30"
                     }`}
                   >
-                    <Briefcase className="w-4 h-4" /> Investor
+                    Investor
                   </button>
                   <button
                     type="button"
@@ -263,7 +272,7 @@ export default function ApplyPage() {
                         : "border-white/20 bg-white/10 hover:border-white/30"
                     }`}
                   >
-                    <Rocket className="w-4 h-4" /> Innovator
+                    Innovator
                   </button>
                   <button
                     type="button"
@@ -274,7 +283,7 @@ export default function ApplyPage() {
                         : "border-white/20 bg-white/10 hover:border-white/30"
                     }`}
                   >
-                    <User className="w-4 h-4" /> Creator
+                    Creator
                   </button>
                 </div>
               </motion.div>
@@ -336,7 +345,7 @@ export default function ApplyPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#4FC3F7]" />
-                  <span>48hr verification</span>
+                  <span>~48hr verification</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#4FC3F7]" />
