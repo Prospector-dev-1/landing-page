@@ -92,6 +92,18 @@ export function SEO({
     ]
   };
 
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Fishtank",
+    "url": baseUrl,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${baseUrl}/?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   const pageStructuredData = type === 'article' ? {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -163,6 +175,9 @@ export function SEO({
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(websiteStructuredData)}
       </script>
       <script type="application/ld+json">
         {JSON.stringify(breadcrumbStructuredData)}
