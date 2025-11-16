@@ -1,3 +1,4 @@
+import {React} from "react";
 import { motion } from "motion/react";
 import { FileText, Users, Hammer, Rocket } from "lucide-react";
 
@@ -58,7 +59,7 @@ export function HowItWorks() {
             <div className="h-full bg-gradient-to-r from-[#4FC3F7] via-[#7C4DFF] to-[#4FC3F7] opacity-30" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-1 gap-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}
@@ -112,10 +113,7 @@ export function HowItWorks() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#4FC3F7]/20 to-[#7C4DFF]/20 backdrop-blur-sm border border-white/10">
-            <div className="w-2 h-2 rounded-full bg-[#4FC3F7] animate-pulse" />
-            <span className="text-sm text-white/70">Average time from startup to funding: 14 days</span>
-          </div>
+          
         </motion.div>
       </div>
     </section>

@@ -87,7 +87,7 @@ export function SubmitInnovation() {
     const accessKey = env.VITE_WEB3FORMS_ACCESS_KEY as string;
 
     if (!accessKey) {
-      toast.error("Form service not configured. Please add your Web3Forms access key.");
+      toast.error("We appologize but somthing went wrong. Please try again later.");
       return;
     }
 
@@ -217,13 +217,15 @@ export function SubmitInnovation() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4">Submit Your Innovation</h2>
+          <h2 className="text-4xl md:text-5xl mb-4">Join the Beta</h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Take the first step toward making your startup a reality
+            
           </p>
         </motion.div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          
+          
           {/* Form - keep same size card, change internals to match /apply */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -243,39 +245,41 @@ export function SubmitInnovation() {
                 aria-hidden="true"
               />
               {/* Role selector */}
-              <div className="flex flex-wrap gap-3">
+              
+              <div className="text-center flex flex-wrap justify-center gap-2 sm:gap-3">
+                  
                 <button
                   type="button"
                   onClick={() => setRole("investor")}
-                  className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                  className={`flex-1 min-w-[90px] sm:flex-none sm:min-w-[110px] px-3 py-2 sm:px-6 sm:py-2.5 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center justify-center gap-2 text-sm sm:text-base font-medium ${
                     role === "investor"
                       ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
                       : "border-white/20 bg-white/10 hover:border-white/30"
                   }`}
                 >
-                  <Briefcase className="w-4 h-4" /> Investor
+                  <p className="text-white/90">Investor</p>
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole("innovator")}
-                  className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                  className={`flex-1 min-w-[90px] sm:flex-none sm:min-w-[110px] px-3 py-2 sm:px-6 sm:py-2.5 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center justify-center gap-2 text-sm sm:text-base font-medium ${
                     role === "innovator"
                       ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
                       : "border-white/20 bg-white/10 hover:border-white/30"
                   }`}
                 >
-                  <Rocket className="w-4 h-4" /> Innovator
+                   Innovator
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole("creator")}
-                  className={`px-4 py-2 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center gap-2 ${
+                  className={`flex-1 min-w-[90px] sm:flex-none sm:min-w-[110px] px-3 py-2 sm:px-6 sm:py-2.5 rounded-xl border backdrop-blur-sm transition-all inline-flex items-center justify-center gap-2 text-sm sm:text-base font-medium ${
                     role === "creator"
                       ? "border-[#4FC3F7] bg-[#4FC3F7]/30 shadow-[0_0_0_1px_rgba(79,195,247,0.3)]"
                       : "border-white/20 bg-white/10 hover:border-white/30"
                   }`}
                 >
-                  <User className="w-4 h-4" /> Creator
+                   Creator
                 </button>
               </div>
 

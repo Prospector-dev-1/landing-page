@@ -74,10 +74,10 @@ export function Hero() {
                 key={item.title}
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="relative group"
+                className="relative group h-full"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all">
+                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all h-full flex flex-col">
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                     style={{
@@ -88,10 +88,10 @@ export function Hero() {
                     <item.icon className="w-6 h-6" style={{ color: item.color }} />
                   </div>
                   <h3 className="text-white mb-2">{item.title}</h3>
-                  <p className="text-white/50 text-sm">
-                    {i === 0 && "Submit your breakthrough startup"}
-                    {i === 1 && "Build the next big thing"}
-                    {i === 2 && "Fund tomorrow's winners"}
+                  <p className="text-white/50 text-sm flex-grow">
+                    {i === 0 && <p>Showcase your breakthrough startup <br />Find the right creators to help build and scale it.<br />Get funded and launch.</p>}
+                    {i === 1 && <p>Find Founders who need you skills <br />Chose if youd like to Freelance, or join the starup working for Equity.</p>}
+                    {i === 2 && <p>Back high‑potential startups before they go mainstream.<br />Get a share of the upside. </p>}
                   </p>
                 </div>
               </motion.div>
